@@ -18,63 +18,55 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+<body class="app">
+    <div id="loader">
+        <div class="spinner"></div>
     </div>
+    @if(!\Auth::check())
+        @yield('content')
+    @else
+        <div>
+            @include('layouts.sidebar')
+            <div class="page-container">
+                @include('layouts.header-nav')
+                <main class="main-content bgc-grey-100">
+                    <div id="mainContent">
+                        @yield('content')
+                    </div>
+                </main>
+                <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+                    <span>Copyright © {{ date('Y') }} Designed by 
+                        <a href="https://devchris.com.ng" target="_blank" title="Devchris">
+                            Devchris
+                        </a>.
+                        All rights reserved.
+                    </span>
+                </footer>
+            </div>
+        </div>
+    @endif
+    <div id="app">
+    </div>
+    <script type="text/javascript">window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        setTimeout(() => {
+        loader.classList.add('fadeOut');
+        }, 300);
+    });</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/custom.js') }}"></script>
+    {{-- <script defer src="../../../static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"rayId":"5f60a2757a0ec500","version":"2020.11.6","si":10}'></script> --}}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 </body>
 </html>
