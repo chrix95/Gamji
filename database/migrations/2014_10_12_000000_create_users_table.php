@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('dob');
             $table->string('employee_code')->nullable();
-            $table->integer('branch_id');
+            $table->integer('branch_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role')->default('0');

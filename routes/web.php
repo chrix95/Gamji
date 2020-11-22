@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (!\Auth::check()) {
-        return redirect()->route('login');
-    }
+    return redirect()->route('login');
 });
 
 Auth::routes(['register' => false]);
+
+Route::get('/create-user', function () {
+    User::create([
+        'name' => "Christopher Okokon Ntuk",
+        'email' => "admin@admin.com",
+        'phone' => "081837880409",
+        'password' => Hash::make('secret'),
+        'address' => "Dove court garden estate, Utako, Abuja FCT",
+        'dob' => "1995-09-05",
+        'employee_code' => "GAM-U982002",
+        'branch_id' => NULL,
+        'role' => 1,
+    ]);
+    return "Done";
+})->name('create.user');
 
 Route::get('/home', 'HomeController@index')->name('home');
