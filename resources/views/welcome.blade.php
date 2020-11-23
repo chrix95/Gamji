@@ -1,463 +1,512 @@
 @extends('layouts.app')
+@section('page', 'Dashboard')
+@section('route', 'home')
+@section('page_description', 'Analytics and recent updates on projects')
 @section('content')
-<div class="row gap-20 masonry pos-r">
-    <div class="masonry-sizer col-md-6"></div>
-    <div class="masonry-item w-100">
-      <div class="row gap-20">
-        <div class="col-md-3">
-          <div class="layers bd bgc-white p-20">
-            <div class="layer w-100 mB-10">
-              <h6 class="lh-1">Total Visits</h6>
-            </div>
-            <div class="layer w-100">
-              <div class="peers ai-sb fxw-nw">
-                <div class="peer peer-greed"><span id="sparklinedash"></span></div>
-                <div class="peer"><span
-                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-green-50 c-green-500">+10%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="layers bd bgc-white p-20">
-            <div class="layer w-100 mB-10">
-              <h6 class="lh-1">Total Page Views</h6>
-            </div>
-            <div class="layer w-100">
-              <div class="peers ai-sb fxw-nw">
-                <div class="peer peer-greed"><span id="sparklinedash2"></span></div>
-                <div class="peer"><span
-                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-red-50 c-red-500">-7%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="layers bd bgc-white p-20">
-            <div class="layer w-100 mB-10">
-              <h6 class="lh-1">Unique Visitor</h6>
-            </div>
-            <div class="layer w-100">
-              <div class="peers ai-sb fxw-nw">
-                <div class="peer peer-greed"><span id="sparklinedash3"></span></div>
-                <div class="peer"><span
-                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-purple-50 c-purple-500">~12%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="layers bd bgc-white p-20">
-            <div class="layer w-100 mB-10">
-              <h6 class="lh-1">Bounce Rate</h6>
-            </div>
-            <div class="layer w-100">
-              <div class="peers ai-sb fxw-nw">
-                <div class="peer peer-greed"><span id="sparklinedash4"></span></div>
-                <div class="peer"><span
-                    class="d-ib lh-0 va-m fw-600 bdrs-10em pX-15 pY-15 bgc-blue-50 c-blue-500">33%</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="masonry-item col-12">
-      <div class="bd bgc-white">
-        <div class="peers fxw-nw@lg+ ai-s">
-          <div class="peer peer-greed w-70p@lg+ w-100@lg- p-20">
-            <div class="layers">
-              <div class="layer w-100 mB-10">
-                <h6 class="lh-1">Site Visits</h6>
-              </div>
-              <div class="layer w-100">
-                <div id="world-map-marker"></div>
-              </div>
-            </div>
-          </div>
-          <div class="peer bdL p-20 w-30p@lg+ w-100p@lg-">
-            <div class="layers">
-              <div class="layer w-100">
-                <div class="layers">
-                  <div class="layer w-100">
-                    <h5 class="mB-5">100k</h5><small class="fw-600 c-grey-700">Visitors From USA</small> <span
-                      class="pull-right c-grey-600 fsz-sm">50%</span>
-                    <div class="progress mT-10">
-                      <div class="progress-bar bgc-deep-purple-500" role="progressbar" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100" style="width:50%"><span class="sr-only">50%
-                          Complete</span></div>
-                    </div>
+<div class="page-wrapper">
+  <div class="page-body">
+      <!-- [ page content ] start -->
+      <div class="row">
+
+          <!-- sale revenue card start -->
+          <div class="col-md-12 col-xl-8">
+              <div class="card sale-card">
+                  <div class="card-header">
+                      <h5>Deals Analytics</h5>
                   </div>
-                  <div class="layer w-100 mT-15">
-                    <h5 class="mB-5">1M</h5><small class="fw-600 c-grey-700">Visitors From Europe</small> <span
-                      class="pull-right c-grey-600 fsz-sm">80%</span>
-                    <div class="progress mT-10">
-                      <div class="progress-bar bgc-green-500" role="progressbar" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100" style="width:80%"><span class="sr-only">80%
-                          Complete</span></div>
-                    </div>
+                  <div class="card-block">
+                      <div id="sales-analytics" class="chart-shadow"
+                          style="height:380px"></div>
                   </div>
-                  <div class="layer w-100 mT-15">
-                    <h5 class="mB-5">450k</h5><small class="fw-600 c-grey-700">Visitors From Australia</small>
-                    <span class="pull-right c-grey-600 fsz-sm">40%</span>
-                    <div class="progress mT-10">
-                      <div class="progress-bar bgc-light-blue-500" role="progressbar" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100" style="width:40%"><span class="sr-only">40%
-                          Complete</span></div>
-                    </div>
-                  </div>
-                  <div class="layer w-100 mT-15">
-                    <h5 class="mB-5">1B</h5><small class="fw-600 c-grey-700">Visitors From India</small> <span
-                      class="pull-right c-grey-600 fsz-sm">90%</span>
-                    <div class="progress mT-10">
-                      <div class="progress-bar bgc-blue-grey-500" role="progressbar" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100" style="width:90%"><span class="sr-only">90%
-                          Complete</span></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10">
-                  <div class="peer">
-                    <div class="easy-pie-chart" data-size="80" data-percent="75" data-bar-color="#f44336">
-                      <span></span></div>
-                    <h6 class="fsz-sm">New Users</h6>
-                  </div>
-                  <div class="peer">
-                    <div class="easy-pie-chart" data-size="80" data-percent="50" data-bar-color="#2196f3">
-                      <span></span></div>
-                    <h6 class="fsz-sm">New Purchases</h6>
-                  </div>
-                  <div class="peer">
-                    <div class="easy-pie-chart" data-size="80" data-percent="90" data-bar-color="#ff9800">
-                      <span></span></div>
-                    <h6 class="fsz-sm">Bounce Rate</h6>
-                  </div>
-                </div>
               </div>
-            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="masonry-item col-md-6">
-      <div class="bd bgc-white">
-        <div class="layers">
-          <div class="layer w-100 pX-20 pT-20">
-            <h6 class="lh-1">Monthly Stats</h6>
-          </div>
-          <div class="layer w-100 p-20"><canvas id="line-chart" height="220"></canvas></div>
-          <div class="layer bdT p-20 w-100">
-            <div class="peers ai-c jc-c gapX-20">
-              <div class="peer"><span class="fsz-def fw-600 mR-10 c-grey-800">10% <i
-                    class="fa fa-level-up c-green-500"></i></span> <small class="c-grey-500 fw-600">APPL</small>
-              </div>
-              <div class="peer fw-600"><span class="fsz-def fw-600 mR-10 c-grey-800">2% <i
-                    class="fa fa-level-down c-red-500"></i></span> <small
-                  class="c-grey-500 fw-600">Average</small></div>
-              <div class="peer fw-600"><span class="fsz-def fw-600 mR-10 c-grey-800">15% <i
-                    class="fa fa-level-up c-green-500"></i></span> <small
-                  class="c-grey-500 fw-600">Sales</small></div>
-              <div class="peer fw-600"><span class="fsz-def fw-600 mR-10 c-grey-800">8% <i
-                    class="fa fa-level-down c-red-500"></i></span> <small
-                  class="c-grey-500 fw-600">Profit</small></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="masonry-item col-md-6">
-      <div class="bd bgc-white p-20">
-        <div class="layers">
-          <div class="layer w-100 mB-10">
-            <h6 class="lh-1">Todo List</h6>
-          </div>
-          <div class="layer w-100">
-            <ul class="list-task list-group" data-role="tasklist">
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall1" name="inputCheckboxesCall" class="peer"><label for="inputCall1"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Call John for
-                      Dinner</span></label></div>
-              </li>
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall2" name="inputCheckboxesCall" class="peer"><label for="inputCall2"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Book Boss Flight</span>
-                    <span class="peer"><span class="badge badge-pill fl-r badge-success lh-0 p-10">2
-                        Days</span></span></label></div>
-              </li>
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall3" name="inputCheckboxesCall" class="peer"><label for="inputCall3"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Hit the Gym</span> <span
-                      class="peer"><span class="badge badge-pill fl-r badge-danger lh-0 p-10">3
-                        Minutes</span></span></label></div>
-              </li>
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall4" name="inputCheckboxesCall" class="peer"><label for="inputCall4"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Give Purchase
-                      Report</span> <span class="peer"><span
-                        class="badge badge-pill fl-r badge-warning lh-0 p-10">not
-                        important</span></span></label></div>
-              </li>
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall5" name="inputCheckboxesCall" class="peer"><label for="inputCall5"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Watch Game of Thrones
-                      Episode</span> <span class="peer"><span
-                        class="badge badge-pill fl-r badge-info lh-0 p-10">Tomorrow</span></span></label></div>
-              </li>
-              <li class="list-group-item bdw-0" data-role="task">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c"><input type="checkbox"
-                    id="inputCall6" name="inputCheckboxesCall" class="peer"><label for="inputCall6"
-                    class="peers peer-greed js-sb ai-c"><span class="peer peer-greed">Give Purchase
-                      report</span> <span class="peer"><span
-                        class="badge badge-pill fl-r badge-success lh-0 p-10">Done</span></span></label></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="masonry-item col-md-6">
-      <div class="bd bgc-white">
-        <div class="layers">
-          <div class="layer w-100 p-20">
-            <h6 class="lh-1">Sales Report</h6>
-          </div>
-          <div class="layer w-100">
-            <div class="bgc-light-blue-500 c-white p-20">
-              <div class="peers ai-c jc-sb gap-40">
-                <div class="peer peer-greed">
-                  <h5>November 2017</h5>
-                  <p class="mB-0">Sales Report</p>
-                </div>
-                <div class="peer">
-                  <h3 class="text-right">$6,000</h3>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive p-20">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="bdwT-0">Name</th>
-                    <th class="bdwT-0">Status</th>
-                    <th class="bdwT-0">Date</th>
-                    <th class="bdwT-0">Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="fw-600">Item #1 Name</td>
-                    <td><span class="badge bgc-red-50 c-red-700 p-10 lh-0 tt-c badge-pill">Unavailable</span>
-                    </td>
-                    <td>Nov 18</td>
-                    <td><span class="text-success">$12</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #2 Name</td>
-                    <td><span
-                        class="badge bgc-deep-purple-50 c-deep-purple-700 p-10 lh-0 tt-c badge-pill">New</span>
-                    </td>
-                    <td>Nov 19</td>
-                    <td><span class="text-info">$34</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #3 Name</td>
-                    <td><span class="badge bgc-pink-50 c-pink-700 p-10 lh-0 tt-c badge-pill">New</span></td>
-                    <td>Nov 20</td>
-                    <td><span class="text-danger">-$45</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #4 Name</td>
-                    <td><span
-                        class="badge bgc-green-50 c-green-700 p-10 lh-0 tt-c badge-pill">Unavailable</span></td>
-                    <td>Nov 21</td>
-                    <td><span class="text-success">$65</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #5 Name</td>
-                    <td><span class="badge bgc-red-50 c-red-700 p-10 lh-0 tt-c badge-pill">Used</span></td>
-                    <td>Nov 22</td>
-                    <td><span class="text-success">$78</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #6 Name</td>
-                    <td><span class="badge bgc-orange-50 c-orange-700 p-10 lh-0 tt-c badge-pill">Used</span>
-                    </td>
-                    <td>Nov 23</td>
-                    <td><span class="text-danger">-$88</span></td>
-                  </tr>
-                  <tr>
-                    <td class="fw-600">Item #7 Name</td>
-                    <td><span class="badge bgc-yellow-50 c-yellow-700 p-10 lh-0 tt-c badge-pill">Old</span></td>
-                    <td>Nov 22</td>
-                    <td><span class="text-success">$56</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="ta-c bdT w-100 p-20"><a href="#">Check all the sales</a></div>
-      </div>
-    </div>
-    <div class="masonry-item col-md-6">
-      <div class="bd bgc-white p-20">
-        <div class="layers">
-          <div class="layer w-100 mB-20">
-            <h6 class="lh-1">Weather</h6>
-          </div>
-          <div class="layer w-100">
-            <div class="peers ai-c jc-sb fxw-nw">
-              <div class="peer peer-greed">
-                <div class="layers">
-                  <div class="layer w-100">
-                    <div class="peers fxw-nw ai-c">
-                      <div class="peer mR-20">
-                        <h3>32<sup>°F</sup></h3>
+          <div class="col-md-12 col-xl-4">
+              <div class="card comp-card">
+                  <div class="card-body">
+                      <div class="row align-items-center">
+                          <div class="col">
+                              <h6 class="m-b-25">Impressions</h6>
+                              <h3 class="f-w-700 text-c-blue">1,563</h3>
+                              <p class="m-b-0">May 23 - June 01 (2017)</p>
+                          </div>
+                          <div class="col-auto">
+                              <i class="fas fa-eye bg-c-blue"></i>
+                          </div>
                       </div>
-                      <div class="peer"><canvas class="sleet" width="44" height="44"></canvas></div>
-                    </div>
                   </div>
-                  <div class="layer w-100"><span class="fw-600 c-grey-600">Partly Clouds</span></div>
-                </div>
               </div>
-              <div class="peer">
-                <div class="layers ai-fe">
-                  <div class="layer">
-                    <h5 class="mB-5">Monday</h5>
+              <div class="card comp-card">
+                  <div class="card-body">
+                      <div class="row align-items-center">
+                          <div class="col">
+                              <h6 class="m-b-25">Goal</h6>
+                              <h3 class="f-w-700 text-c-green">30,564</h3>
+                              <p class="m-b-0">May 23 - June 01 (2017)</p>
+                          </div>
+                          <div class="col-auto">
+                              <i class="fas fa-bullseye bg-c-green"></i>
+                          </div>
+                      </div>
                   </div>
-                  <div class="layer"><span class="fw-600 c-grey-600">Nov, 01 2017</span></div>
-                </div>
               </div>
-            </div>
+              <div class="card comp-card">
+                  <div class="card-body">
+                      <div class="row align-items-center">
+                          <div class="col">
+                              <h6 class="m-b-25">Impact</h6>
+                              <h3 class="f-w-700 text-c-yellow">42.6%</h3>
+                              <p class="m-b-0">May 23 - June 01 (2017)</p>
+                          </div>
+                          <div class="col-auto">
+                              <i class="fas fa-hand-paper bg-c-yellow"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="layer w-100 mY-30">
-            <div class="layers bdB">
-              <div class="layer w-100 bdT pY-5">
-                <div class="peers ai-c jc-sb fxw-nw">
-                  <div class="peer"><span>Wind</span></div>
-                  <div class="peer ta-r"><span class="fw-600 c-grey-800">10km/h</span></div>
-                </div>
+          <!-- sale revenue card end -->
+
+          <!-- Project statustic start -->
+          <div class="col-xl-12">
+              <div class="card proj-progress-card">
+                  <div class="card-block">
+                      <div class="row">
+                          <div class="col-xl-3 col-md-6">
+                              <h6>Published Project</h6>
+                              <h5 class="m-b-30 f-w-700">532<span
+                                      class="text-c-green m-l-10">+1.69%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-red"
+                                      style="width:25%"></div>
+                              </div>
+                          </div>
+                          <div class="col-xl-3 col-md-6">
+                              <h6>Completed Task</h6>
+                              <h5 class="m-b-30 f-w-700">4,569<span
+                                      class="text-c-red m-l-10">-0.5%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-blue"
+                                      style="width:65%"></div>
+                              </div>
+                          </div>
+                          <div class="col-xl-3 col-md-6">
+                              <h6>Successfull Task</h6>
+                              <h5 class="m-b-30 f-w-700">89%<span
+                                      class="text-c-green m-l-10">+0.99%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-green"
+                                      style="width:85%"></div>
+                              </div>
+                          </div>
+                          <div class="col-xl-3 col-md-6">
+                              <h6>Ongoing Project</h6>
+                              <h5 class="m-b-30 f-w-700">365<span
+                                      class="text-c-green m-l-10">+0.35%</span></h5>
+                              <div class="progress">
+                                  <div class="progress-bar bg-c-yellow"
+                                      style="width:45%"></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-              <div class="layer w-100 bdT pY-5">
-                <div class="peers ai-c jc-sb fxw-nw">
-                  <div class="peer"><span>Sunrise</span></div>
-                  <div class="peer ta-r"><span class="fw-600 c-grey-800">05:00 AM</span></div>
-                </div>
-              </div>
-              <div class="layer w-100 bdT pY-5">
-                <div class="peers ai-c jc-sb fxw-nw">
-                  <div class="peer"><span>Pressure</span></div>
-                  <div class="peer ta-r"><span class="fw-600 c-grey-800">1B</span></div>
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="layer w-100">
-            <div class="peers peers-greed ai-fs ta-c">
-              <div class="peer">
-                <h6 class="mB-10">MON</h6><canvas class="sleet" width="30" height="30"></canvas><span
-                  class="d-b fw-600">32<sup>°F</sup></span>
+          <!-- Project statustic end -->
+
+          <!-- sale 2 card start -->
+          <div class="col-md-12 col-xl-4">
+              <div class="card card-blue text-white">
+                  <div class="card-block p-b-0">
+                      <div class="row m-b-50">
+                          <div class="col">
+                              <h6 class="m-b-5">Sales In July</h6>
+                              <h5 class="m-b-0 f-w-700">$2665.00</h5>
+                          </div>
+                          <div class="col-auto text-center">
+                              <p class="m-b-5">Direct Sale</p>
+                              <h6 class="m-b-0">$1768</h6>
+                          </div>
+
+                          <div class="col-auto text-center">
+                              <p class="m-b-5">Referal</p>
+                              <h6 class="m-b-0">$897</h6>
+                          </div>
+                      </div>
+
+                      <div id="sec-ecommerce-chart-line" class="" style="height:60px">
+                      </div>
+                      <div id="sec-ecommerce-chart-bar" style="height:195px"></div>
+                  </div>
               </div>
-              <div class="peer">
-                <h6 class="mB-10">TUE</h6><canvas class="clear-day" width="30" height="30"></canvas><span
-                  class="d-b fw-600">30<sup>°F</sup></span>
-              </div>
-              <div class="peer">
-                <h6 class="mB-10">WED</h6><canvas class="partly-cloudy-day" width="30"
-                  height="30"></canvas><span class="d-b fw-600">28<sup>°F</sup></span>
-              </div>
-              <div class="peer">
-                <h6 class="mB-10">THR</h6><canvas class="cloudy" width="30" height="30"></canvas><span
-                  class="d-b fw-600">32<sup>°F</sup></span>
-              </div>
-              <div class="peer">
-                <h6 class="mB-10">FRI</h6><canvas class="snow" width="30" height="30"></canvas><span
-                  class="d-b fw-600">24<sup>°F</sup></span>
-              </div>
-              <div class="peer">
-                <h6 class="mB-10">SAT</h6><canvas class="wind" width="30" height="30"></canvas><span
-                  class="d-b fw-600">28<sup>°F</sup></span>
-              </div>
-              <div class="peer">
-                <h6 class="mB-10">SUN</h6><canvas class="sleet" width="30" height="30"></canvas><span
-                  class="d-b fw-600">32<sup>°F</sup></span>
-              </div>
-            </div>
           </div>
-        </div>
+          <div class="col-xl-4 col-md-12">
+              <div class="card latest-update-card">
+                  <div class="card-header">
+                      <h5>What’s New</h5>
+                      <div class="card-header-right">
+                          <ul class="list-unstyled card-option">
+                              <li class="first-opt"><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                              <li><i class="feather icon-maximize full-card"></i></li>
+                              <li><i class="feather icon-minus minimize-card"></i>
+                              </li>
+                              <li><i class="feather icon-refresh-cw reload-card"></i>
+                              </li>
+                              <li><i class="feather icon-trash close-card"></i></li>
+                              <li><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="card-block">
+                      <div class="scroll-widget">
+                          <div class="latest-update-box">
+                              <div class="row p-t-20 p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <img src="files/assets/images/avatar-4.jpg"
+                                          alt="user image"
+                                          class="img-radius img-40 align-top m-r-15 update-icon">
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Your Manager Posted.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Jonny michel</p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i
+                                          class="feather icon-briefcase bg-c-red update-icon"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>You have 3 pending Task.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Hemilton</p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i
+                                          class="feather icon-check f-w-600 bg-c-green update-icon"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>New Order Received.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Hemilton</p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <img src="files/assets/images/avatar-4.jpg"
+                                          alt="user image"
+                                          class="img-radius img-40 align-top m-r-15 update-icon">
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Your Manager Posted.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Jonny michel</p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i
+                                          class="feather icon-briefcase bg-c-red update-icon"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>You have 3 pending Task.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Hemilton</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i
+                                          class="feather icon-check f-w-600 bg-c-green update-icon"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>New Order Received.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Hemilton</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-4 col-md-6">
+              <div class="card latest-update-card">
+                  <div class="card-header">
+                      <h5>Latest Activity</h5>
+                      <div class="card-header-right">
+                          <ul class="list-unstyled card-option">
+                              <li class="first-opt"><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                              <li><i class="feather icon-maximize full-card"></i></li>
+                              <li><i class="feather icon-minus minimize-card"></i>
+                              </li>
+                              <li><i class="feather icon-refresh-cw reload-card"></i>
+                              </li>
+                              <li><i class="feather icon-trash close-card"></i></li>
+                              <li><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="card-block">
+                      <div class="scroll-widget">
+                          <div class="latest-update-box">
+                              <div class="row p-t-20 p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-primary update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Devlopment & Update</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem ipsum dolor
+                                          sit amet, <a href="#!" class="text-c-blue">
+                                              More</a></p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-primary update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Showcases</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem dolor sit
+                                          amet, <a href="#!" class="text-c-blue">
+                                              More</a></p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-success update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Miscellaneous</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem ipsum dolor
+                                          sit ipsum amet, <a href="#!"
+                                              class="text-c-green"> More</a></p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-danger update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Your Manager Posted.</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem ipsum dolor
+                                          sit amet, <a href="#!" class="text-c-red">
+                                              More</a></p>
+                                  </div>
+                              </div>
+                              <div class="row p-b-30">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-primary update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Showcases</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem dolor sit
+                                          amet, <a href="#!" class="text-c-blue">
+                                              More</a></p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-auto text-right update-meta p-r-0">
+                                      <i class="b-success update-icon ring"></i>
+                                  </div>
+                                  <div class="col p-l-5">
+                                      <a href="#!">
+                                          <h6>Miscellaneous</h6>
+                                      </a>
+                                      <p class="text-muted m-b-0">Lorem ipsum dolor
+                                          sit ipsum amet, <a href="#!"
+                                              class="text-c-green"> More</a></p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- sale 2 card end -->
+
+          <!-- testimonial and top selling start -->
+          <div class="col-md-12">
+              <div class="card table-card">
+                  <div class="card-header">
+                      <h5>New Products</h5>
+                      <div class="card-header-right">
+                          <ul class="list-unstyled card-option">
+                              <li class="first-opt"><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                              <li><i class="feather icon-maximize full-card"></i></li>
+                              <li><i class="feather icon-minus minimize-card"></i>
+                              </li>
+                              <li><i class="feather icon-refresh-cw reload-card"></i>
+                              </li>
+                              <li><i class="feather icon-trash close-card"></i></li>
+                              <li><i
+                                      class="feather icon-chevron-left open-card-option"></i>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="card-block p-b-0">
+                      <div class="table-responsive">
+                          <table class="table table-hover m-b-0">
+                              <thead>
+                                  <tr>
+                                      <th>Name</th>
+                                      <th>Product Code</th>
+                                      <th>Customer</th>
+                                      <th>Status</th>
+                                      <th>Rating</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td>Sofa</td>
+                                      <td>#PHD001</td>
+                                      <td>abc@gmail.com</td>
+                                      <td><label class="label label-danger">Out
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Computer</td>
+                                      <td>#PHD002</td>
+                                      <td>cdc@gmail.com</td>
+                                      <td><label class="label label-success">In
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Mobile</td>
+                                      <td>#PHD003</td>
+                                      <td>pqr@gmail.com</td>
+                                      <td><label class="label label-danger">Out
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Coat</td>
+                                      <td>#PHD004</td>
+                                      <td>bcs@gmail.com</td>
+                                      <td><label class="label label-success">In
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Watch</td>
+                                      <td>#PHD005</td>
+                                      <td>cdc@gmail.com</td>
+                                      <td><label class="label label-success">In
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>Shoes</td>
+                                      <td>#PHD006</td>
+                                      <td>pqr@gmail.com</td>
+                                      <td><label class="label label-danger">Out
+                                              Stock</label></td>
+                                      <td>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-c-yellow"></i></a>
+                                          <a href="#!"><i
+                                                  class="fa fa-star f-12 text-default"></i></a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
-    <div class="masonry-item col-md-6">
-      <div class="bd bgc-white">
-        <div class="layers">
-          <div class="layer w-100 p-20">
-            <h6 class="lh-1">Quick Chat</h6>
-          </div>
-          <div class="layer w-100">
-            <div class="bgc-grey-200 p-20 gapY-15">
-              <div class="peers fxw-nw">
-                <div class="peer mR-20"><img class="w-2r bdrs-50p"
-                    src="../../../randomuser.me/api/portraits/men/11.jpg" alt=""></div>
-                <div class="peer peer-greed">
-                  <div class="layers ai-fs gapY-5">
-                    <div class="layer">
-                      <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                        <div class="peer mR-10"><small>10:00 AM</small></div>
-                        <div class="peer-greed"><span>Lorem Ipsum is simply dummy text of</span></div>
-                      </div>
-                    </div>
-                    <div class="layer">
-                      <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                        <div class="peer mR-10"><small>10:00 AM</small></div>
-                        <div class="peer-greed"><span>the printing and typesetting industry.</span></div>
-                      </div>
-                    </div>
-                    <div class="layer">
-                      <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                        <div class="peer mR-10"><small>10:00 AM</small></div>
-                        <div class="peer-greed"><span>Lorem Ipsum has been the industry's</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="peers fxw-nw ai-fe">
-                <div class="peer ord-1 mL-20"><img class="w-2r bdrs-50p"
-                    src="../../../randomuser.me/api/portraits/men/12.jpg" alt=""></div>
-                <div class="peer peer-greed ord-0">
-                  <div class="layers ai-fe gapY-10">
-                    <div class="layer">
-                      <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                        <div class="peer mL-10 ord-1"><small>10:00 AM</small></div>
-                        <div class="peer-greed ord-0"><span>Heloo</span></div>
-                      </div>
-                    </div>
-                    <div class="layer">
-                      <div class="peers fxw-nw ai-c pY-3 pX-10 bgc-white bdrs-2 lh-3/2">
-                        <div class="peer mL-10 ord-1"><small>10:00 AM</small></div>
-                        <div class="peer-greed ord-0"><span>??</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="p-20 bdT bgc-white">
-              <div class="pos-r"><input type="text" class="form-control bdrs-10em m-0"
-                  placeholder="Say something..."> <button type="button"
-                  class="btn btn-primary bdrs-50p w-2r p-0 h-2r pos-a r-1 t-1"><i
-                    class="fa fa-paper-plane-o"></i></button></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
+</div>
 @endsection
