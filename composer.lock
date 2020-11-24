@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18934ccd94a8203942f39a7c11b4b723",
+    "content-hash": "e35abd3174d1d094ea00dfcedb5557bc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4684,6 +4684,72 @@
                 }
             ],
             "time": "2020-11-12T00:07:28+00:00"
+        },
+        {
+            "name": "watson/active",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwightwatson/active.git",
+                "reference": "3136d3ba5c364c4469a164a356b689109a60a1bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwightwatson/active/zipball/3136d3ba5c364c4469a164a356b689109a60a1bf",
+                "reference": "3136d3ba5c364c4469a164a356b689109a60a1bf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^7.0",
+                "illuminate/http": "^7.0",
+                "illuminate/routing": "^7.0",
+                "illuminate/support": "^7.0",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0",
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Watson\\Active\\ActiveServiceProvider"
+                    ],
+                    "aliases": {
+                        "Active": "Watson\\Watson\\Facades\\Active"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Watson\\Active\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studiousapp.com"
+                }
+            ],
+            "description": "Laravel helper for recognising the current route, controller and action",
+            "keywords": [
+                "active",
+                "laravel",
+                "routing"
+            ],
+            "support": {
+                "issues": "https://github.com/dwightwatson/active/issues",
+                "source": "https://github.com/dwightwatson/active/tree/master"
+            },
+            "time": "2020-03-03T20:25:22+00:00"
         }
     ],
     "packages-dev": [

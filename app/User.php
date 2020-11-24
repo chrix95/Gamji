@@ -29,6 +29,6 @@ class User extends Authenticatable
         return $this->hasMany(Requistion::class);
     }
     public function branch () {
-        return $this->hasOne(Branch::class);
+        return $this->hasOne(Branch::class, 'id', 'branch_id');
     }
 }

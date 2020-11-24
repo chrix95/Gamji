@@ -2,7 +2,7 @@
 	<div class="navbar-wrapper">
 		<div class="navbar-logo">
 			<a href="index-2.html">
-				<img class="img-fluid" src="files/assets/images/logo.png" alt="Theme-Logo" />
+				<img class="img-fluid" src="{{ asset('files/assets/images/logo.png') }}" alt="Theme-Logo" />
 			</a>
 			<a class="mobile-menu" id="mobile-collapse" href="#!">
 				<i class="feather icon-menu icon-toggle-right"></i>
@@ -82,23 +82,11 @@
 					<div class="dropdown-primary dropdown">
 						<div class="dropdown-toggle" data-toggle="dropdown">
 							<img src="{{ asset('files/assets/images/avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image">
-							<span>John Doe</span>
+							<span>{{ Auth::user()->name }}</span>
 							<i class="feather icon-chevron-down"></i>
 						</div>
 						<ul class="show-notification profile-notification dropdown-menu"
 							data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-							<li>
-								<a href="#!">
-									<i class="feather icon-settings"></i> Settings
-
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="feather icon-user"></i> Profile
-
-								</a>
-							</li>
 							<li>
 								<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
 									<i class="feather icon-log-out"></i>

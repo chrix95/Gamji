@@ -12,7 +12,7 @@ class Inventory extends Model
         return $this->hasMany(InventoryLog::class);
     }
     public function branch () {
-        return $this->hasOne(Branch::class);
+        return $this->hasOne(Branch::class, 'id', 'branch_id');
     }
     public function stocks () {
         return $this->hasMany(Stock::class);

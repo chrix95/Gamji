@@ -21,19 +21,30 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/create-user', function () {
-    User::create([
-        'name' => "Christopher Okokon Ntuk",
-        'email' => "admin@admin.com",
-        'phone' => "081837880409",
-        'password' => Hash::make('secret'),
-        'address' => "Dove court garden estate, Utako, Abuja FCT",
-        'dob' => "1995-09-05",
-        'employee_code' => "GAM-U982002",
-        'branch_id' => NULL,
-        'role' => 1,
-    ]);
-    return "Done";
-})->name('create.user');
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    // Human Resource
+    Route::prefix('employee')->group(function () {
+        Route::get('list', 'EmployeeController@index')->name('employee.list');
+        Route::get('create', 'EmployeeController@create')->name('employee.create');
+        Route::get('edit/{employee_code}', 'EmployeeController@edit')->name('employee.edit');
+        Route::get('view/{employee_code}', 'EmployeeController@view')->name('employee.view');
+        Route::post('store', 'EmployeeController@store')->name('employee.store');
+        Route::post('update', 'EmployeeController@update')->name('employee.update');
+        Route::get('destroy/{id}', 'EmployeeController@destroy')->name('employee.destroy');
+    });
+    // Branches
+    Route::prefix('branches')->group(function () {
+        Route::get('list', 'BranchController@index')->name('branches.list');
+        Route::get('create', 'BranchController@create')->name('branches.create');
+        Route::get('edit/{id}', 'BranchController@edit')->name('branches.edit');
+        Route::post('store', 'BranchController@store')->name('branches.store');
+        Route::post('update', 'BranchController@update')->name('branches.update');
+        Route::get('destroy/{id}', 'BranchController@destroy')->name('branches.destroy');
+    });
+    // Settings
+    Route::prefix('settings')->group(function () {
+        Route::get('change-password', 'SettingsController@passwordView')->name('settings.password')->middleware('password.confirm');
+        Route::post('change-password', 'SettingsController@changePassword')->name('settings.password.change');
+    });
+});
