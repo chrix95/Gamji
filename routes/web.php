@@ -23,6 +23,16 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    // Project
+    Route::prefix('project')->group(function () {
+        Route::get('list', 'ProjectController@index')->name('project.list');
+        Route::get('create', 'ProjectController@create')->name('project.create');
+        Route::get('edit/{project_code}', 'ProjectController@edit')->name('project.edit');
+        Route::get('view/{project_code}', 'ProjectController@view')->name('project.view');
+        Route::post('store', 'ProjectController@store')->name('project.store');
+        Route::post('update', 'ProjectController@update')->name('project.update');
+        Route::get('destroy/{id}', 'ProjectController@destroy')->name('project.destroy');
+    });
     // Human Resource
     Route::prefix('employee')->group(function () {
         Route::get('list', 'EmployeeController@index')->name('employee.list');

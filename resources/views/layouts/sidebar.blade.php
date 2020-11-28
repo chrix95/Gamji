@@ -13,6 +13,29 @@
                     </a>
                 </li>
             </ul>
+            <div class="pcoded-navigation-label">Project Management</div>
+            <ul class="pcoded-item pcoded-left-item">
+                <li class="pcoded-hasmenu {{ active(['project/*'], 'active pcoded-trigger') }}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-gitlab"></i>
+                        </span>
+                        <span class="pcoded-mtext">Project</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{ active(['project.list'], 'active') }}">
+                            <a href="{{ route('project.list') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">List</span>
+                            </a>
+                        </li>
+                        <li class="{{ active(['project.create'], 'active') }}">
+                            <a href="{{ route('project.create') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Create project</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
             <div class="pcoded-navigation-label">Human Resources Management</div>
             <ul class="pcoded-item pcoded-left-item">
                 <li class="pcoded-hasmenu {{ active(['employee/*'], 'active pcoded-trigger') }}">

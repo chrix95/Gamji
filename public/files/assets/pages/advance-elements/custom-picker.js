@@ -104,6 +104,11 @@ $("#dropper-default").dateDropper( {
         dropPrimaryColor: "#1abc9c",
         dropBorder: "1px solid #1abc9c"
     }),
+$(".dropper-default").dateDropper( {
+        dropWidth: 200,
+        dropPrimaryColor: "#1abc9c",
+        dropBorder: "1px solid #1abc9c"
+    }),
 $("#dropper-animation").dateDropper( {
         dropWidth: 200,
         init_animation: "bounce",

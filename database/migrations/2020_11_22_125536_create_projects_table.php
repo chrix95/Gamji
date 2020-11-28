@@ -23,7 +23,7 @@ class CreateProjectsTable extends Migration
             $table->string('client_name');
             $table->string('client_phone')->nullable();
             $table->string('estimated_cost')->nullable();
-            $table->enum('status', ['created', 'ongoing', 'paused', 'completed', 'closed']);
+            $table->enum('status', ['created', 'ongoing', 'paused', 'completed', 'closed'])->default('created');
             $table->timestamps();
         });
     }

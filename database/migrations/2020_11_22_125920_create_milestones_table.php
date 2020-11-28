@@ -15,6 +15,12 @@ class CreateMilestonesTable extends Migration
     {
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
+            $table->string('project_id');
+            $table->string('name');
+            $table->text('description');
+            $table->string('start_date');
+            $table->string('expected_end_date');
+            $table->enum('status', ['created', 'ongoing', 'paused', 'completed'])->default('created');
             $table->timestamps();
         });
     }
