@@ -112,32 +112,20 @@
             </ul>
             <div class="pcoded-navigation-label">Secretary</div>
             <ul class="pcoded-item pcoded-left-item">
-                <li class="pcoded-hasmenu {{ active(['secretary/*'], 'active pcoded-trigger') }}">
-                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                        <span class="pcoded-micon">
-                            <i class="feather icon-gitlab"></i>
-                        </span>
-                        <span class="pcoded-mtext">Letters</span>
-                    </a>
-                    <ul class="pcoded-submenu">
-                        <li class="{{ active(['letter.list'], 'active') }}">
-                            <a href="{{ route('letter.list') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">List</span>
-                            </a>
-                        </li>
-                        <li class="{{ active(['letter.create'], 'active') }}">
-                            <a href="{{ route('letter.create') }}" class="waves-effect waves-dark">
-                                <span class="pcoded-mtext">Create</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="{{ active(['settings.password'], 'active') }}">
-                    <a href="{{ route('settings.password') }}" class="waves-effect pcoded-trigger waves-dark">
+                <li class="{{ active(['secretary.letter.list'], 'active') }}">
+                    <a href="{{ route('secretary.letter.list') }}" class="waves-effect pcoded-trigger waves-dark">
                     <span class="pcoded-micon">
                     <i class="feather icon-home"></i>
                     </span>
-                    <span class="pcoded-mtext">Change Password</span>
+                    <span class="pcoded-mtext">Letters</span>
+                    </a>
+                </li>
+                <li class="{{ active(['secretary.minute.list'], 'active') }}">
+                    <a href="{{ route('secretary.minute.list') }}" class="waves-effect pcoded-trigger waves-dark">
+                    <span class="pcoded-micon">
+                    <i class="feather icon-home"></i>
+                    </span>
+                    <span class="pcoded-mtext">Minutes</span>
                     </a>
                 </li>
             </ul>

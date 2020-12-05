@@ -52,13 +52,20 @@ Route::group(['middleware' => ['auth']], function () {
     });
     // Secretary management
     Route::prefix('secretary')->group(function () {
-        Route::get('list', 'StoreController@index')->name('store.list');
-        Route::get('create', 'StoreController@create')->name('store.create');
-        Route::get('edit/{id}', 'StoreController@edit')->name('store.edit');
-        Route::get('view/{id}', 'StoreController@view')->name('store.view');
-        Route::post('store', 'StoreController@store')->name('store.store');
-        Route::post('update', 'StoreController@update')->name('store.update');
-        Route::get('destroy/{id}', 'StoreController@destroy')->name('store.destroy');
+        // Letters
+        Route::get('letter/upload', 'SecretaryController@letterIndex')->name('secretary.letter.list');
+        Route::get('letter/create', 'SecretaryController@letterCreate')->name('secretary.letter.create');
+        Route::post('letter/store', 'SecretaryController@letterStore')->name('secretary.letter.store');
+        Route::get('letter/destroy/{id}', 'SecretaryController@letterDestroy')->name('secretary.letter.destroy');
+        // Minutes
+        Route::get('minute/upload', 'SecretaryController@minuteIndex')->name('secretary.minute.list');
+        Route::get('minute/create', 'SecretaryController@minuteCreate')->name('secretary.minute.create');
+        Route::post('minute/store', 'SecretaryController@minuteStore')->name('secretary.minute.store');
+        Route::get('minute/view/{id}', 'SecretaryController@minuteView')->name('secretary.minute.view');
+        Route::get('minute/edit/{id}', 'SecretaryController@minuteEdit')->name('secretary.minute.edit');
+        Route::post('minute/update', 'SecretaryController@minuteUpdate')->name('secretary.minute.update');
+        Route::get('minute/destroy/{id}', 'SecretaryController@minuteDestroy')->name('secretary.minute.destroy');
+
     });
     // Supllier management
     Route::prefix('supplier')->group(function () {
