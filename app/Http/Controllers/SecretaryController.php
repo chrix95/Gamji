@@ -182,8 +182,7 @@ class SecretaryController extends Controller
                 $request->file('file_url')->move($file_path, $file);
                 $minute->update($data);
             } else {
-                Arr::except($data, ['file_url']);
-                $minute->update($data);
+                $minute->update(Arr::except($data, ['file_url']));
             }
             Session::flash('success', 'Minute updated successfully');
             return redirect()->route('secretary.minute.view', ['id' => $minute->id]);   

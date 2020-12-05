@@ -33,6 +33,11 @@
                             <span class="pcoded-mtext">Create project</span>
                             </a>
                         </li>
+                        {{-- <li class="{{ active(['expenses.list'], 'active') }}">
+                            <a href="{{ route('expenses.list') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Expenses</span>
+                            </a>
+                        </li> --}}
                     </ul>
                 </li>
             </ul>

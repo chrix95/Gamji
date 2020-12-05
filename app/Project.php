@@ -28,7 +28,6 @@ class Project extends Model
             $total += $value->amount;
         }
         return $total;
-        return $this->hasMany(Expense::class);
     }
     public function getTotalMilestonesAttribute () {
         return count($this->milestones);

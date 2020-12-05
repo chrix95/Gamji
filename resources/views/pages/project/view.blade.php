@@ -11,9 +11,6 @@
                             <h6 class="m-b-5 text-white">Estimated Cost</h6>
                             <h3 class="m-b-0 f-w-700 text-white">&#8358; {{ number_format($project->estimated_cost, 2) }}</h3>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-money-bill-alt text-c-red f-18"></i>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -24,10 +21,7 @@
                     <div class="row align-items-center m-b-30">
                         <div class="col">
                             <h6 class="m-b-5 text-white">Total Expenses</h6>
-                            <h3 class="m-b-0 f-w-700 text-white">&#8358; {{ number_format($project->completedMilestone, 2) }}</h3>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-money-bill-alt text-c-blue f-18"></i>
+                            <h3 class="m-b-0 f-w-700 text-white">&#8358; {{ number_format($project->totalExpenses, 2) }}</h3>
                         </div>
                     </div>
                 </div>
@@ -41,9 +35,6 @@
                             <h6 class="m-b-5 text-white">Project Completion</h6>
                             <h3 class="m-b-0 f-w-700 text-white">{{ number_format((100/$project->totalMilestones) * $project->completedMilestones, 2) }} %</h3>
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-flag text-c-green f-18"></i>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -55,9 +46,6 @@
                         <div class="col">
                             <h6 class="m-b-5 text-white">Total Milestones</h6>
                             <h3 class="m-b-0 f-w-700 text-white">{{ $project->totalMilestones }}</h3>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-flag text-c-yellow f-18"></i>
                         </div>
                     </div>
                 </div>
@@ -84,6 +72,7 @@
                                 Project Details
                             </h5>
                         </div>
+                        @if ($project->status !== 'closed' || $project->status !== 'completed')
                         <div class="col-md-7 text-right">
                             <a href="{{ route('project.create.milestone', ['project_id' => $project->id]) }}">
                                 <button type="button" class="btn btn-primary btn-sm">Add Milestone</button>
@@ -91,7 +80,11 @@
                             <a href="{{ route('project.edit', ['project_code' => $project->project_code]) }}">
                                 <button type="button" class="btn btn-info btn-sm">Edit Project</button>
                             </a>
+                            <a href="{{ route('project.expenses.create', ['id' => $project->id]) }}">
+                                <button type="button" class="btn btn-danger btn-sm">Add Expenses</button>
+                            </a>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="row card-block">

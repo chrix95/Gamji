@@ -39,8 +39,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{milestone_id}', 'ProjectController@editMilestone')->name('project.edit.milestone');
             Route::post('update', 'ProjectController@updateMilestone')->name('project.update.milestone');
         });
+        // Expenses management
+        Route::prefix('expenses')->group(function () {
+            Route::get('create/{id}', 'ExpensesController@create')->name('project.expenses.create');
+            Route::post('store', 'ExpensesController@store')->name('project.expenses.store');
+        });
     });
-    // Store management
     Route::prefix('store')->group(function () {
         Route::get('list', 'StoreController@index')->name('store.list');
         Route::get('create', 'StoreController@create')->name('store.create');
@@ -65,7 +69,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('minute/edit/{id}', 'SecretaryController@minuteEdit')->name('secretary.minute.edit');
         Route::post('minute/update', 'SecretaryController@minuteUpdate')->name('secretary.minute.update');
         Route::get('minute/destroy/{id}', 'SecretaryController@minuteDestroy')->name('secretary.minute.destroy');
-
     });
     // Supllier management
     Route::prefix('supplier')->group(function () {
