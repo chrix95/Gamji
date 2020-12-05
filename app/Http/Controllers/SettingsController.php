@@ -40,7 +40,7 @@ class SettingsController extends Controller
             return redirect()->back();
         } catch (\Throwable $th) {
             \Log::info($th);
-            return redirect()->back()->withErrors('Internal server error. Contat admin for support')->withInput();
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
         }
     }
 

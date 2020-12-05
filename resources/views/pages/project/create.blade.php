@@ -47,7 +47,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input id="dropper-default-1" class="form-control dropper-default" name="start_date" type="date" value="{{ old('start_date') }}" placeholder="Select a start date" />
+                            <input id="dropper-default-1" class="form-control dropper-default" min="{{ substr(now(), 0, 10) }}" name="start_date" type="date" value="{{ old('start_date') }}" placeholder="Select a start date" />
                         </div>
                     </div>
                     <div class="form-group row">

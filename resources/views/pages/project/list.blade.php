@@ -40,9 +40,27 @@
                             <td>{{ $item->project_code }}</td>
                             <td>{{ $item->branch->name }}</td>
                             <td>{{ $item->start_date }}</td>
-                            <td>{{ $item->expected_end_date }}</td>
+                            <td>
+                                @if ($item->expected_end_date >= substr(now(), 0, 10))
+                                    <span class="label label-danger">{{ $item->expected_end_date }} - Overdue</span>
+                                @else
+                                    {{ $item->expected_end_date }}
+                                @endif
+                            </td>
                             <td>{{ $item->client_name }}</td>
-                            <td>{{ $item->status }}</td>
+                            <td>
+                                @if ($item->status == 'created')
+                                    <span class="label label-primary">{{ ucfirst($item->status) }}</span>
+                                @elseif ($item->status == 'ongoing')
+                                    <span class="label label-info">{{ ucfirst($item->status) }}</span>
+                                @elseif ($item->status == 'paused')
+                                    <span class="label label-warning">{{ ucfirst($item->status) }}</span>
+                                @elseif ($item->status == 'closed')
+                                    <span class="label label-danger">{{ ucfirst($item->status) }}</span>
+                                @else
+                                    <span class="label label-success">{{ ucfirst($item->status) }}</span>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('project.view', ['project_code' => $item->project_code]) }}">
                                     <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>

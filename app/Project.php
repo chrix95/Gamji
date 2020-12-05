@@ -22,4 +22,51 @@ class Project extends Model
     public function expenses () {
         return $this->hasMany(Expense::class);
     }
+    public function getTotalExpensesAttribute () {
+        $total = 0;
+        foreach ($this->expenses as $key => $value) {
+            $total += $value->amount;
+        }
+        return $total;
+        return $this->hasMany(Expense::class);
+    }
+    public function getTotalMilestonesAttribute () {
+        return count($this->milestones);
+    }
+    public function getCompletedMilestonesAttribute () {
+        $total = 0;
+        foreach ($this->milestones as $key => $value) {
+            if ($value->status == 'completed') {
+                $total += 1;
+            }
+        }
+        return $total;
+    }
+    public function getOngoingMilestonesAttribute () {
+        $total = 0;
+        foreach ($this->milestones as $key => $value) {
+            if ($value->status == 'ongoing') {
+                $total += 1;
+            }
+        }
+        return $total;
+    }
+    public function getPendingMilestonesAttribute () {
+        $total = 0;
+        foreach ($this->milestones as $key => $value) {
+            if ($value->status == 'created') {
+                $total += 1;
+            }
+        }
+        return $total;
+    }
+    public function getPausedMilestonesAttribute () {
+        $total = 0;
+        foreach ($this->milestones as $key => $value) {
+            if ($value->status == 'paused') {
+                $total += 1;
+            }
+        }
+        return $total;
+    }
 }

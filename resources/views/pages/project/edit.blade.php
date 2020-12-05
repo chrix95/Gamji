@@ -48,13 +48,13 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Start date</label>
                         <div class="col-sm-10">
-                            <input id="dropper-default-1" class="form-control dropper-default" name="start_date" type="text" value="{{ $project->start_date }}" placeholder="Select a start date" />
+                            <input id="dropper-default-1" class="form-control" min="{{ substr(now(), 0, 10) }}" name="start_date" type="date" value="{{ $project->start_date }}" placeholder="Select a start date" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Expected end date</label>
                         <div class="col-sm-10">
-                            <input id="dropper-default-2" class="form-control dropper-default" name="expected_end_date" type="date" value="{{ $project->expected_end_date }}" placeholder="Select a expected end date" />
+                            <input id="dropper-default-2" class="form-control" name="expected_end_date" type="date" value="{{ $project->expected_end_date }}" placeholder="Select a expected end date" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -93,8 +93,11 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <a href="{{ route('project.view', ['project_code' => $project->project_code]) }}">
+                                <button type="button" class="btn btn-warning btn-sm">Cancel</button>
+                            </a>
                         </div>
                     </div>
                 </form>

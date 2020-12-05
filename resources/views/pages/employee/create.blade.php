@@ -72,7 +72,7 @@
                             Date of Birth
                         </div>
                         <div class="col-sm-10">
-                            <input id="dropper-default" class="form-control" name="dob" type="text" value="{{ old('dob') }}" placeholder="Select date of birth" />
+                            <input id="dropper-default" class="form-control" name="dob" type="date" max="{{ substr(now(), 0, 10) }}" value="{{ old('dob') }}" placeholder="Select date of birth" />
                         </div>
                     </div>
                     <div class="form-group row">

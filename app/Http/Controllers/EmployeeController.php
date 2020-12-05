@@ -58,7 +58,7 @@ class EmployeeController extends Controller
             return redirect()->route('employee.list');   
         } catch (\Throwable $th) {
             \Log::info($th);
-            return redirect()->back()->withErrors('Internal server error. Contat admin for support')->withInput();
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
         }
     }
 
@@ -102,7 +102,7 @@ class EmployeeController extends Controller
             return redirect()->route('employee.list');
         } catch (\Throwable $th) {
             \Log::info($th);
-            return redirect()->back()->withErrors('Internal server error. Contat admin for support')->withInput();
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
         }
     }
 
