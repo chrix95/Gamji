@@ -23,6 +23,9 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::prefix('select')->group(function () {
+        Route::get('option/{branch_id}', 'HomeController@select')->name('select.option.list');
+    });
     // Project
     Route::prefix('project')->group(function () {
         Route::get('list', 'ProjectController@index')->name('project.list');

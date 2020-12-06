@@ -95,7 +95,7 @@
                     </ul>
                 </li>
             </ul>
-            <div class="pcoded-navigation-label">Admin</div>
+            <div class="pcoded-navigation-label">Secretary</div>
             <ul class="pcoded-item pcoded-left-item">
                 <li class="{{ active(['secretary.letter.list'], 'active') }}">
                     <a href="{{ route('secretary.letter.list') }}" class="waves-effect pcoded-trigger waves-dark">
@@ -114,7 +114,7 @@
                     </a>
                 </li>
             </ul>
-            <div class="pcoded-navigation-label">Settings</div>
+            <div class="pcoded-navigation-label">Admin Module</div>
             <ul class="pcoded-item pcoded-left-item">
                 <li class="pcoded-hasmenu {{ active(['branches/*'], 'active pcoded-trigger') }}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">

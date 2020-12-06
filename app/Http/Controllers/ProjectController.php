@@ -16,6 +16,9 @@ class ProjectController extends Controller
 {
     public function index (Request $request) {
         $projects = Project::orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $projects = $projects->where('branch_id', Auth::user()->branch_id);    
+        }
         return view('pages.project.list', compact('projects'));
     }
 

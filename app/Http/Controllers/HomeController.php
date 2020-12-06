@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);    
+        }
+        return view('welcome', compact('branches'));
+    }
+
+    public function select(Request $request, $branch_id) {
+        $branch = Branch::find($branch_id);
+        if(!$branch) {
+            abort(404);
+        }
+        return view('branch_option', compact('branch'));
     }
 }
