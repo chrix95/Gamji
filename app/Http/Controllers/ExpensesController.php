@@ -22,7 +22,14 @@ class ExpensesController extends Controller
         return view('pages.store.list', compact('inventory'));
     }
 
-    public function create (Request $request, $id) {
+    public function create (Request $request) {
+        $projects = Project::orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $projects = $projects->where('branch_id', Auth::user()->branch_id);    
+        }
+        return view('pages.project.expenses.new', compact('projects'));
+    }
+    public function add (Request $request, $id) {
         $project = Project::find($id);
         if (!$project) {
             abort(404);

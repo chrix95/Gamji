@@ -80,7 +80,7 @@
                             <a href="{{ route('project.edit', ['project_code' => $project->project_code]) }}">
                                 <button type="button" class="btn btn-info btn-sm">Edit Project</button>
                             </a>
-                            <a href="{{ route('project.expenses.create', ['id' => $project->id]) }}">
+                            <a href="{{ route('project.expenses.add', ['id' => $project->id]) }}">
                                 <button type="button" class="btn btn-danger btn-sm">Add Expenses</button>
                             </a>
                         </div>
@@ -220,6 +220,39 @@
                             @empty
                                 <p>No milstone for this project <a href="{{ route('project.create.milestone', ['project_id' => $project->id]) }}" class="text-c-blue"> Create a milstone</a></p>
                             @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="card latest-update-card">
+                <div class="card-header">
+                    <h5>Project Expenses</h5>
+                </div>
+                <div class="card-block">
+                    <div class="scroll-widget">
+                        <div class="dt-responsive table-responsive">
+                            <table id="order-table" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Amount</th>
+                                        <th>Remark</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($project->expenses as $value => $item)
+                                    <tr>
+                                        <td>{{ $value + 1 }}</td>
+                                        <td>{{ $item->amount }}</td>
+                                        <td>{{ $item->remark }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -41,7 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
         // Expenses management
         Route::prefix('expenses')->group(function () {
-            Route::get('create/{id}', 'ExpensesController@create')->name('project.expenses.create');
+            Route::get('create', 'ExpensesController@create')->name('project.expenses.create');
+            Route::get('add/{id}', 'ExpensesController@add')->name('project.expenses.add');
             Route::post('store', 'ExpensesController@store')->name('project.expenses.store');
         });
     });
