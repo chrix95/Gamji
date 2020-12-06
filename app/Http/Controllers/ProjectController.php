@@ -24,6 +24,9 @@ class ProjectController extends Controller
 
     public function create (Request $request) {
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         return view('pages.project.create', compact('branches'));
     }
     
@@ -69,6 +72,9 @@ class ProjectController extends Controller
     public function edit (Request $request, $project_code) {
         $project = Project::where('project_code', $project_code)->first();
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         if (!$project) {
             abort(404);
         }

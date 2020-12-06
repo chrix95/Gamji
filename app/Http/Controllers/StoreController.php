@@ -29,6 +29,9 @@ class StoreController extends Controller
     public function create (Request $request) {
         $suppliers = Supplier::orderBy('name', 'asc')->get(['id', 'name']);
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         return view('pages.store.create', compact('branches', 'suppliers'));
     }
     
@@ -82,6 +85,9 @@ class StoreController extends Controller
     public function edit (Request $request, $id) {
         $inventory = Inventory::find($id);
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         $suppliers = Supplier::orderBy('name', 'asc')->get(['id', 'name']);
         if (!$inventory) {
             abort(404);

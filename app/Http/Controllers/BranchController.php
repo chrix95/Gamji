@@ -11,6 +11,9 @@ class BranchController extends Controller
 {
     public function index (Request $request) {
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         return view('pages.branches.list', compact('branches'));
     }
 

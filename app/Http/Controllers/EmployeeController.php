@@ -14,11 +14,17 @@ class EmployeeController extends Controller
 {
     public function index (Request $request) {
         $users = User::where('role', '0')->orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $users = $users->where('branch_id', Auth::user()->branch_id);
+        }
         return view('pages.employee.list', compact('users'));
     }
 
     public function create (Request $request) {
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         return view('pages.employee.create', compact('branches'));
     }
     
@@ -52,6 +58,11 @@ class EmployeeController extends Controller
         }
         $data['password'] = Hash::make($request->password);
         // send an email to the user if requested
+        if (\Auth::user()->branch_id !== NULL) {
+            if (\Auth::user()->branch_id !== $data['branch_id']) {
+                return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
+            }
+        }
         try {
             User::create($data);
             Session::flash('success', 'User created successfully');
@@ -65,6 +76,9 @@ class EmployeeController extends Controller
     public function edit (Request $request, $employee_code) {
         $user = User::where('employee_code', $employee_code)->first();
         $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
         if (!$user) {
             abort(404);
         }
@@ -122,6 +136,5 @@ class EmployeeController extends Controller
         $user->delete();
         return redirect()->back();
     }
-
 
 }
