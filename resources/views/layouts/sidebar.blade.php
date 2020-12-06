@@ -71,26 +71,6 @@
                     <span class="pcoded-mtext">List of Suppliers</span>
                     </a>
                 </li>
-                {{-- <li class="pcoded-hasmenu {{ active(['supplier/*'], 'active pcoded-trigger') }}">
-                    <a href="javascript:void(0)" class="waves-effect waves-dark">
-                        <span class="pcoded-micon">
-                            <i class="feather icon-gitlab"></i>
-                        </span>
-                        <span class="pcoded-mtext">Supplier</span>
-                    </a>
-                    <ul class="pcoded-submenu">
-                        <li class="{{ active(['supplier.list'], 'active') }}">
-                            <a href="{{ route('supplier.list') }}" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext">List all Suppliers</span>
-                            </a>
-                        </li>
-                        <li class="{{ active(['supplier.create'], 'active') }}">
-                            <a href="{{ route('supplier.create') }}" class="waves-effect waves-dark">
-                            <span class="pcoded-mtext">Create supplier</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
             </ul>
             <div class="pcoded-navigation-label">Human Resources Management</div>
             <ul class="pcoded-item pcoded-left-item">
@@ -115,7 +95,7 @@
                     </ul>
                 </li>
             </ul>
-            <div class="pcoded-navigation-label">Secretary</div>
+            <div class="pcoded-navigation-label">Admin</div>
             <ul class="pcoded-item pcoded-left-item">
                 <li class="{{ active(['secretary.letter.list'], 'active') }}">
                     <a href="{{ route('secretary.letter.list') }}" class="waves-effect pcoded-trigger waves-dark">
