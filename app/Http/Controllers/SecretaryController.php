@@ -53,7 +53,7 @@ class SecretaryController extends Controller
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
         if (\Auth::user()->branch_id !== NULL) {
-            if (\Auth::user()->branch_id !== $data['branch_id']) {
+            if (\Auth::user()->branch_id != $data['branch_id']) {
                 return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
             }
         }
@@ -118,7 +118,7 @@ class SecretaryController extends Controller
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
         if (\Auth::user()->branch_id !== NULL) {
-            if (\Auth::user()->branch_id !== $data['branch_id']) {
+            if (\Auth::user()->branch_id != $data['branch_id']) {
                 return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
             }
         }
@@ -170,7 +170,7 @@ class SecretaryController extends Controller
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
         if (\Auth::user()->branch_id !== NULL) {
-            if (\Auth::user()->branch_id !== $data['branch_id']) {
+            if (\Auth::user()->branch_id != $data['branch_id']) {
                 return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
             }
         }

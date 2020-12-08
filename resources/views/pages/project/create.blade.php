@@ -62,21 +62,21 @@
                             <input type="number" class="form-control" name="estimated_cost" placeholder="Estimated project cost" value="{{ old('estimated_cost') }}">
                         </div>
                     </div>
+                    @if (Auth::user()->branch_id !== NULL)
+                        <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
+                    @else
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Select a Branch</label>
                         <div class="col-sm-10">
                             <select name="branch_id" class="form-control">
                                 <option value="" selected disabled>Select a  option</option>
-                                @if (Auth::user()->branch_id !== NULL)
-                                <option value="{{ Auth::user()->branch_id }}">{{ Auth::user()->branch->name }}</option>
-                                @else
                                 @foreach ($branches as $item)
                                 <option @if(old('branch_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
-                                @endif
                             </select>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary btn-sm">Submit</button>

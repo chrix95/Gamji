@@ -33,7 +33,11 @@
                     <div class="row align-items-center m-b-30">
                         <div class="col">
                             <h6 class="m-b-5 text-white">Project Completion</h6>
-                            <h3 class="m-b-0 f-w-700 text-white">{{ number_format((100/$project->totalMilestones) * $project->completedMilestones, 2) }} %</h3>
+                            @if ($project->totalMilestones == 0)
+                                <h3 class="m-b-0 f-w-700 text-white">0%</h3>
+                            @else
+                                <h3 class="m-b-0 f-w-700 text-white">{{ number_format((100/$project->totalMilestones) * $project->completedMilestones, 2) }} %</h3>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -52,11 +56,11 @@
             </div>
         </div>
     </div>
-    @if ($project->expected_end_date >= substr(now(), 0, 10))
+    @if (substr(now(), 0, 10) >= $project->expected_end_date)
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-danger">
-                The expected timeeline for the {{ $project->project_name }} project is currently <strong>OVERDUE</strong>
+                The expected timeline for the {{ $project->project_name }} project is currently <strong>OVERDUE</strong>
             </div>
         </div>
     </div>
@@ -148,30 +152,62 @@
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <h6>Pending milestones</h6>
-                            <h5 class="m-b-30 f-w-700">{{ number_format($project->pendingMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->pendingMilestones, 2) }}%</span></h5>
+                            @if ($project->totalMilestones == 0)
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->pendingMilestones) }}<span class="text-c-green m-l-10">0%</span></h5>
+                            @else
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->pendingMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->pendingMilestones, 2) }}%</span></h5>
+                            @endif
                             <div class="progress">
-                                <div class="progress-bar bg-c-red" style="width:{{ (100/$project->totalMilestones) * $project->pendingMilestones }}%"></div>
+                                @if ($project->totalMilestones == 0)
+                                    <div class="progress-bar bg-c-red" style="width: 0%"></div>
+                                @else
+                                    <div class="progress-bar bg-c-red" style="width:{{ (100/$project->totalMilestones) * $project->pendingMilestones }}%"></div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <h6>Ongoing milestones</h6>
-                            <h5 class="m-b-30 f-w-700">{{ number_format($project->ongoingMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->ongoingMilestones, 2) }}%</span></h5>
+                            @if ($project->totalMilestones == 0)
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->ongoingMilestones) }}<span class="text-c-green m-l-10">0%</span></h5>
+                            @else
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->ongoingMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->ongoingMilestones, 2) }}%</span></h5>
+                            @endif
                             <div class="progress">
-                                <div class="progress-bar bg-c-yellow" style="width:{{ (100/$project->totalMilestones) * $project->ongoingMilestones }}%"></div>
+                                @if ($project->totalMilestones == 0)
+                                    <div class="progress-bar bg-c-yellow" style="width: 0%"></div>
+                                @else
+                                    <div class="progress-bar bg-c-yellow" style="width:{{ (100/$project->totalMilestones) * $project->ongoingMilestones }}%"></div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <h6>Paused milestones</h6>
-                            <h5 class="m-b-30 f-w-700">{{ number_format($project->pausedMilestones) }}<span class="text-c-red m-l-10">{{ number_format((100/$project->totalMilestones) * $project->pausedMilestones, 2) }}%</span></h5>
+                            @if ($project->totalMilestones == 0)
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->pausedMilestones) }}<span class="text-c-red m-l-10">0%</span></h5>
+                            @else
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->pausedMilestones) }}<span class="text-c-red m-l-10">{{ number_format((100/$project->totalMilestones) * $project->pausedMilestones, 2) }}%</span></h5>
+                            @endif
                             <div class="progress">
-                                <div class="progress-bar bg-c-blue" style="width:{{ (100/$project->totalMilestones) * $project->pausedMilestones }}%"></div>
+                                @if ($project->totalMilestones == 0)
+                                    <div class="progress-bar bg-c-blue" style="width: 0%"></div>
+                                @else
+                                    <div class="progress-bar bg-c-blue" style="width:{{ (100/$project->totalMilestones) * $project->pausedMilestones }}%"></div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <h6>Completed milestones</h6>
-                            <h5 class="m-b-30 f-w-700">{{ number_format($project->completedMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->completedMilestones, 2) }}%</span></h5>
+                            @if ($project->totalMilestones == 0)
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->completedMilestones) }}<span class="text-c-green m-l-10">0%</span></h5>
+                            @else
+                                <h5 class="m-b-30 f-w-700">{{ number_format($project->completedMilestones) }}<span class="text-c-green m-l-10">{{ number_format((100/$project->totalMilestones) * $project->completedMilestones, 2) }}%</span></h5>
+                            @endif
                             <div class="progress">
-                                <div class="progress-bar bg-c-green" style="width:{{ (100/$project->totalMilestones) * $project->completedMilestones }}%"></div>
+                                @if ($project->totalMilestones == 0)
+                                    <div class="progress-bar bg-c-green" style="width:0%"></div>
+                                @else
+                                    <div class="progress-bar bg-c-green" style="width:{{ (100/$project->totalMilestones) * $project->completedMilestones }}%"></div>
+                                @endif
                             </div>
                         </div>
                     </div>

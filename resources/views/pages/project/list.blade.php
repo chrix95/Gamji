@@ -41,10 +41,10 @@
                             <td>{{ $item->branch->name }}</td>
                             <td>{{ $item->start_date }}</td>
                             <td>
-                                @if ($item->expected_end_date >= substr(now(), 0, 10))
+                                @if (substr(now(), 0, 10) >= $item->expected_end_date)
                                     <span class="label label-danger">{{ $item->expected_end_date }} - Overdue</span>
                                 @else
-                                    {{ $item->expected_end_date }}
+                                    <span class="label label-warning">{{ $item->expected_end_date }}</span>
                                 @endif
                             </td>
                             <td>{{ $item->client_name }}</td>
