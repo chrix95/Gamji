@@ -136,6 +136,14 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ active(['notification.list'], 'active') }}">
+                    <a href="{{ route('notification.list') }}" class="waves-effect pcoded-trigger waves-dark">
+                    <span class="pcoded-micon">
+                    <i class="feather icon-unlock"></i>
+                    </span>
+                    <span class="pcoded-mtext">Notification/Events</span>
+                    </a>
+                </li>
                 <li class="{{ active(['settings.password'], 'active') }}">
                     <a href="{{ route('settings.password') }}" class="waves-effect pcoded-trigger waves-dark">
                     <span class="pcoded-micon">

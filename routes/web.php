@@ -23,8 +23,17 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    // Dashboard process flow
     Route::prefix('select')->group(function () {
         Route::get('option/{branch_id}', 'HomeController@select')->name('select.option.list');
+    });
+    Route::prefix('notification')->group(function () {
+        Route::get('list', 'HomeController@notificationList')->name('notification.list');
+        Route::get('create', 'HomeController@notificationCreate')->name('notification.create');
+        Route::post('store', 'HomeController@notificationStore')->name('notification.store');
+        Route::get('view/{id}', 'HomeController@notificationView')->name('notification.view');
+        Route::get('edit/{id}', 'HomeController@notificationEdit')->name('notification.edit');
+        Route::get('destroy/{id}', 'HomeController@destroy')->name('notification.destroy');
     });
     // Project
     Route::prefix('project')->group(function () {

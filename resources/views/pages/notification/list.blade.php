@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('page', 'Employee List')
-@section('page_description', 'Employee List')
+@section('page', 'Notification List')
+@section('page_description', 'Notification List')
 @section('content')
     <!-- Default ordering table start -->
     <div class="card">
@@ -12,8 +12,8 @@
                     </h5>
                 </div>
                 <div class="col-md-7 text-right">
-                    <a href="{{ route('employee.create') }}">
-                        <button type="button" class="btn btn-primary btn-sm">Create User</button>
+                    <a href="{{ route('notification.create') }}">
+                        <button type="button" class="btn btn-primary btn-sm">Create Notification</button>
                     </a>
                 </div>
             </div>
@@ -23,30 +23,26 @@
                 <table id="order-table" class="table table-striped table-bordered nowrap">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Employee Code</th>
-                            <th>Phone</th>
-                            <th>Email</th>
+                            <th>Title</th>
                             <th>Branch</th>
+                            <th>Date created</th>
                             <th>[ACTION]</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $item)
+                        @foreach ($notifications as $notification)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->employee_code }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->branch->name }}</td>
+                            <td>{{ $notification->title }}</td>
+                            <td>{{ $notification->branch->name }}</td>
+                            <td>{{ $notification->created_at }}</td>
                             <td>
-                                <a href="{{ route('employee.view', ['employee_code' => $item->employee_code]) }}">
+                                <a href="{{ route('notification.view', ['id' => $notification->id]) }}">
                                     <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>
                                 </a>
-                                <a href="{{ route('employee.edit', ['employee_code' => $item->employee_code]) }}">
+                                <a href="{{ route('notification.edit', ['id' => $notification->id]) }}">
                                     <i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-c-green"></i>
                                 </a>
-                                <a href="{{ route('employee.destroy', ['id' => $item->id]) }}">
+                                <a href="{{ route('notification.destroy', ['id' => $notification->id]) }}">
                                     <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
                                 </a>
                             </td>
