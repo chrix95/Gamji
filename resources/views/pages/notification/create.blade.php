@@ -37,7 +37,7 @@
                             Event date (Required if it's an event)
                         </div>
                         <div class="col-sm-10">
-                            <input id="dropper-default" class="form-control" name="expected_date" type="date" max="{{ substr(now(), 0, 10) }}" value="{{ old('expected_date') }}" placeholder="Select event date" />
+                            <input id="dropper-default" class="form-control" name="expected_date" type="date" min="{{ substr(now(), 0, 10) }}" value="{{ old('expected_date') }}" placeholder="Select event date" />
                         </div>
                     </div>
                     @if (Auth::user()->branch_id !== NULL)
@@ -48,7 +48,7 @@
                         <div class="col-sm-10">
                             <select name="branch_id" class="form-control">
                                 <option value="" selected disabled>Select a  option</option>
-                                <option value="NULL" selected disabled>All branches</option>
+                                <option value="NULL">All branches</option>
                                 @foreach ($branches as $item)
                                 <option @if(old('branch_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

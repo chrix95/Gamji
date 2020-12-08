@@ -33,7 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('store', 'HomeController@notificationStore')->name('notification.store');
         Route::get('view/{id}', 'HomeController@notificationView')->name('notification.view');
         Route::get('edit/{id}', 'HomeController@notificationEdit')->name('notification.edit');
-        Route::get('destroy/{id}', 'HomeController@destroy')->name('notification.destroy');
+        Route::post('update', 'HomeController@notificationUpdate')->name('notification.update');
+        Route::get('destroy/{id}', 'HomeController@notificationDestroy')->name('notification.destroy');
     });
     // Project
     Route::prefix('project')->group(function () {

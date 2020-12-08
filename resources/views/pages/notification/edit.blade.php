@@ -48,7 +48,7 @@
                         <div class="col-sm-10">
                             <select name="branch_id" class="form-control">
                                 <option value="" selected disabled>Select a  option</option>
-                                <option value="NULL" selected disabled>All branches</option>
+                                <option value="NULL">All branches</option>
                                 @foreach ($branches as $item)
                                 <option @if( $notification->branch_id == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

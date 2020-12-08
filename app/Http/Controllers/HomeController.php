@@ -47,7 +47,7 @@ class HomeController extends Controller
     
     public function notificationList (Request $request)
     {
-        $notifications = Notification::latest();
+        $notifications = Notification::latest()->get();
         if (Auth::user()->branch_id !== NULL) {
             $notifications = Notification::where('branch_id', Auth::user()->branch_id)->orWhere('branch_id', NULL)->orderBy('id', 'desc')->get();
         }
@@ -73,7 +73,7 @@ class HomeController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'expected_date' => 'nullable|date',
-            'branch_id' => 'nullable|integer'
+            'branch_id' => 'nullable'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
@@ -84,6 +84,9 @@ class HomeController extends Controller
             }
         }
         try {
+            if ($request->branch_id == "NULL") {
+                $data['branch_id'] = NULL;
+            }
             Notification::create($data);
             Session::flash('success', 'Notification created successfully');
             return redirect()->route('notification.list');   
@@ -120,12 +123,15 @@ class HomeController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'expected_date' => 'nullable|date',
-            'branch_id' => 'required|integer'
+            'branch_id' => 'nullable'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
         try {
+            if ($request->branch_id == "NULL") {
+                $data['branch_id'] = NULL;
+            }
             $notification->update($data);
             return redirect()->route('notification.list');
         } catch (\Throwable $th) {

@@ -25,6 +25,7 @@
                         <tr>
                             <th>Title</th>
                             <th>Branch</th>
+                            <th>Expected date</th>
                             <th>Date created</th>
                             <th>[ACTION]</th>
                         </tr>
@@ -33,7 +34,8 @@
                         @foreach ($notifications as $notification)
                         <tr>
                             <td>{{ $notification->title }}</td>
-                            <td>{{ $notification->branch->name }}</td>
+                            <td>{{ $notification->branch_id !== NULL ? $notification->branch->name : 'All branches' }}</td>
+                            <td>{{ $notification->expected_date ?? 'No event date' }}</td>
                             <td>{{ $notification->created_at }}</td>
                             <td>
                                 <a href="{{ route('notification.view', ['id' => $notification->id]) }}">

@@ -9,10 +9,10 @@
             <div class="row align-items-center m-b-30">
                 <div class="col-md-12">
                     <div class="alert alert-warning">
-                        <strong>{{ strtoupper($notification->title) }}</strong> <br>
+                        <strong>{{ strtoupper($notification->title) }}</strong> <a href="{{ route('notification.list') }}"><span class="b-b-primary text-primary" style="float: right">See all</span></a> <br>
                         {{ substr($notification->content, 0, 200) }}...<br><br>
                         @if ($notification->expected_date !== NULL)
-                            <strong>Date: </strong> {{ $notification->expected_date }}
+                            <strong>Date: </strong> {{ $notification->expected_date }} <br><br>
                         @endif
                         <a href="{{ route('notification.view', ['id' => $notification->id]) }}">
                             <button type="button" class="btn btn-primary btn-sm">Read more</button>
