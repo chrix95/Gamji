@@ -66,7 +66,7 @@ class SecretaryController extends Controller
             } else {
                 return redirect()->back()->withErrors("Kindly upload a valid file")->withInput();
             }
-            $letetr = Letter::create($data);
+            $letter = Letter::create($data);
             Session::flash('success', 'Letter uploaded successfully');
             return redirect()->route('secretary.letter.list');   
         } catch (\Throwable $th) {

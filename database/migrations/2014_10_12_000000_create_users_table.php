@@ -25,6 +25,13 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role')->default('0');
+            $table->string('guarantor_name');
+            $table->integer('guarantor_phone');
+            $table->text('guarantor_address');
+            $table->string('next_of_kin_name');
+            $table->string('next_of_kin_phone');
+            $table->string('means_of_identification');
+            $table->string('employment_letter')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

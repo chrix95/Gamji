@@ -18,7 +18,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('employee.store') }}">
+                <form method="POST" action="{{ route('employee.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Employee Code</label>
@@ -59,12 +59,17 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Select a Branch</label>
                         <div class="col-sm-10">
+                            @if (Auth::user()->branch_id !== NULL)
+                                <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
+                            @else
                             <select name="branch_id" class="form-control">
                                 <option value="" selected disabled>Select a  option</option>
+                                <option value="NULL">All branches</option>
                                 @foreach ($branches as $item)
                                 <option @if(old('branch_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -79,6 +84,58 @@
                         <label class="col-sm-2 col-form-label">Employee Address</label>
                         <div class="col-sm-10">
                             <textarea rows="5" cols="5" class="form-control" name="address" placeholder="Employee Address" style="resize: none">{{ old('address') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Employement Letter</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="employment_letter" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <p><strong>Guarantor Information</strong></p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Guarantor name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="guarantor_name" placeholder="Guarantor name" value="{{ old('guarantor_name') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Guarantor phone</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="guarantor_phone" placeholder="Guarantor phone" value="{{ old('guarantor_phone') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Guarantor Address</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" cols="5" class="form-control" name="guarantor_address" placeholder="Guarantor Address" style="resize: none">{{ old('guarantor_address') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Means of identification</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="means_of_identification" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <p><strong>Next of Kin Information</strong></p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Full name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="next_of_kin_name" placeholder="Next of kin name" value="{{ old('next_of_kin_name') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Phone number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="next_of_kin_phone" placeholder="Next of kin phone number" value="{{ old('next_of_kin_phone') }}">
                         </div>
                     </div>
                     <div class="form-group row">

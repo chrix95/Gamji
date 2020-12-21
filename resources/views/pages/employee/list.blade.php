@@ -38,7 +38,7 @@
                             <td>{{ $item->employee_code }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->email }}</td>
-                            <td>{{ $item->branch->name }}</td>
+                            <td>{{ $item->branch ? $item->branch->name : 'All branch' }}</td>
                             <td>
                                 <a href="{{ route('employee.view', ['employee_code' => $item->employee_code]) }}">
                                     <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>

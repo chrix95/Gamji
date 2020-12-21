@@ -103,6 +103,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('store', 'EmployeeController@store')->name('employee.store');
         Route::post('update', 'EmployeeController@update')->name('employee.update');
         Route::get('destroy/{id}', 'EmployeeController@destroy')->name('employee.destroy');
+        
+        Route::get('docs/{employee_code}/create', 'EmployeeController@createdocs')->name('employee.docs.create');
+        Route::post('docs/{employee_code}/store', 'EmployeeController@storedocs')->name('employee.docs.store');
+        Route::get('docs/destroy/{id}', 'EmployeeController@destroydocs')->name('employee.docs.destroy');
     });
     // Branches
     Route::prefix('branches')->group(function () {
