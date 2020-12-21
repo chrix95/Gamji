@@ -56,12 +56,12 @@
                             <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password">
                         </div>
                     </div>
+                    @if (Auth::user()->branch_id !== NULL)
+                        <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
+                    @else
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Select a Branch</label>
                         <div class="col-sm-10">
-                            @if (Auth::user()->branch_id !== NULL)
-                                <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
-                            @else
                             <select name="branch_id" class="form-control">
                                 <option value="" selected disabled>Select a  option</option>
                                 <option value="NULL">All branches</option>
@@ -69,9 +69,9 @@
                                 <option @if(old('branch_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            @endif
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <div class="col-sm-2 col-form-label">
                             Date of Birth

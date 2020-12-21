@@ -7,7 +7,12 @@
             <!-- List view card start -->
             <div class="card">
                 <div class="card-header">
-                    <h5>Employe Details</h5>
+                    <h5>
+                        Employe Details
+                    </h5>
+                    <a href="{{ route('employee.edit', ['employee_code' => $user->employee_code]) }}" style="float: right;">
+                        <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                    </a>
                 </div>
                 <div class="row card-block">
                     <div class="col-md-12">
@@ -120,7 +125,7 @@
                                                                     <td>{{ $value + 1 }}</td>
                                                                     <td>{{ $item->title }}</td>
                                                                     <td>
-                                                                        <a href="{{ asset($item->docs) }}">
+                                                                        <a href="{{ asset($item->docs) }}" target="_blank">
                                                                             <button type="button" class="btn btn-sm btn-primary">view</button>
                                                                         </a>
                                                                     </td>

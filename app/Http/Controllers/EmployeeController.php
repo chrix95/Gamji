@@ -165,22 +165,44 @@ class EmployeeController extends Controller
             'branch_id' => $request->branch_id,
             'dob' => $request->dob,
             'address' => $request->address,
+            'guarantor_name' => $request->guarantor_name,
+            'guarantor_phone' => $request->guarantor_phone,
+            'guarantor_address' => $request->guarantor_address,
+            'next_of_kin_name' => $request->next_of_kin_name,
+            'next_of_kin_phone' => $request->next_of_kin_phone
         );
         $validator = Validator::make($data, [
             'employee_code' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|email',
             'phone' => 'required|numeric',
-            'branch_id' => 'required|numeric',
+            'branch_id' => 'nullable',
             'dob' => 'required|date',
-            'address' => 'required|string'
+            'address' => 'required|string',
+            'guarantor_name' => 'required|string',
+            'guarantor_phone' => 'required|numeric',
+            'guarantor_address' => 'required|string',
+            'next_of_kin_name' => 'required|string',
+            'next_of_kin_phone' => 'required|string'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
         try {
+            if($request->hasFile('means_of_identification')) {
+                $file = Str::slug($data['guarantor_name']) . time() . '.' . $request->means_of_identification->getClientOriginalExtension();
+                $file_path = 'idcards/upload/';
+                $data['means_of_identification'] = $file_path . $file;
+                $request->file('means_of_identification')->move($file_path, $file);
+            }
+            if($request->hasFile('employment_letter')) {
+                $file = Str::slug($data['name']) . time() . '.' . $request->employment_letter->getClientOriginalExtension();
+                $file_path = 'employment_docs/upload/';
+                $data['employment_letter'] = $file_path . $file;
+                $request->file('employment_letter')->move($file_path, $file);
+            }
             $user->update($data);
-            return redirect()->route('employee.list');
+            return redirect()->route('employee.view', ['employee_code' => $user->employee_code]);
         } catch (\Throwable $th) {
             \Log::info($th);
             return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
