@@ -108,6 +108,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('docs/{employee_code}/store', 'EmployeeController@storedocs')->name('employee.docs.store');
         Route::get('docs/destroy/{id}', 'EmployeeController@destroydocs')->name('employee.docs.destroy');
     });
+    // Progress report
+    Route::prefix('progress')->group(function () {
+        Route::get('report/list', 'ProjectController@progressReportList')->name('progress.report.list');
+        Route::get('report/create', 'ProjectController@progressReportCreate')->name('progress.report.create');
+        Route::post('report/create', 'ProjectController@progressReportStore')->name('progress.report.store');
+        Route::get('report/view/{id}', 'ProjectController@progressReportView')->name('progress.report.view');
+    });
     // Branches
     Route::prefix('branches')->group(function () {
         Route::get('list', 'BranchController@index')->name('branches.list');

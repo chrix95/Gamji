@@ -22,6 +22,9 @@ class Project extends Model
     public function expenses () {
         return $this->hasMany(Expense::class);
     }
+    public function progressReport () {
+        return $this->hasMany(ProgressReport::class);
+    }
     public function getTotalExpensesAttribute () {
         $total = 0;
         foreach ($this->expenses as $key => $value) {

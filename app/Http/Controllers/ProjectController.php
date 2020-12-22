@@ -6,6 +6,8 @@ use App\User;
 use App\Branch;
 use App\Project;
 use App\Milestone;
+use App\ProgressReport;
+use Illuminate\Support\Str; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -54,8 +56,6 @@ class ProjectController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
-        \Log::info(Auth::user()->branch_id);
-        \Log::info($data);
         if (\Auth::user()->branch_id !== NULL) {
             if (\Auth::user()->branch_id != $data['branch_id']) {
                 return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
@@ -221,6 +221,70 @@ class ProjectController extends Controller
             return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
         }
     }
+    
+    public function progressReportList (Request $request) {
+        $reports = ProgressReport::orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $projects = Project::where('branch_id', Auth::user()->branch_id)->pluck('id');
+            $reports = $reports->whereIN('project_id', $projects);
+        }
+        return view('pages.project.reports.list', compact('reports'));
+    }
 
+    public function progressReportCreate (Request $request) {
+        $projects = Project::orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $projects = $projects->where('branch_id', Auth::user()->branch_id);    
+        }
+        return view('pages.project.reports.create', compact('projects'));
+    }
+
+    public function progressReportview (Request $request, $id) {
+        $progress_report = ProgressReport::find($id);
+        if (!$progress_report) {
+            abort(404);
+        }
+        return view('pages.project.reports.view', compact('progress_report'));
+    }
+
+    public function progressReportStore (Request $request) {
+        $data = array(
+            'project_id' => $request->project_id,
+            'title' => $request->title,
+            'description' => $request->description
+        );
+        $validator = Validator::make($data, [
+            'project_id' => 'required|string',
+            'title' => 'required|string',
+            'description' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->first())->withInput();
+        }
+        try {
+            $project = Project::find($request->project_id);
+            if (!$project) {
+                return redirect()->back()->withErrors("Project not found")->withInput();
+            }
+            if($request->hasFile('docs')) {
+                $file = Str::slug($data['title']) . time() . '.' . $request->docs->getClientOriginalExtension();
+                $file_path = 'reports/upload/';
+                $data['docs'] = $file_path . $file;
+                $request->file('docs')->move($file_path, $file);
+            } else {
+                return redirect()->back()->withErrors("Kindly upload a valid document")->withInput();
+            }
+            $progress_report = new ProgressReport();
+            $progress_report->title = $data['title'];
+            $progress_report->description = $data['description'];
+            $progress_report->docs = $data['docs'];
+            $project->progressReport()->save($progress_report);
+            Session::flash('success', 'Progress report uploaded successfully');
+            return redirect()->route('progress.report.list');
+        } catch (\Throwable $th) {
+            \Log::info($th);
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
+        }
+    }
 
 }

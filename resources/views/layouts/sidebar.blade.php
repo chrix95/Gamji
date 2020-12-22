@@ -94,6 +94,26 @@
                         </li>
                     </ul>
                 </li>
+                <li class="pcoded-hasmenu {{ active(['progress/*'], 'active pcoded-trigger') }}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-gitlab"></i>
+                        </span>
+                        <span class="pcoded-mtext">Progress report</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{{ active(['progress.report.list'], 'active') }}">
+                            <a href="{{ route('progress.report.list') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">List</span>
+                            </a>
+                        </li>
+                        <li class="{{ active(['progress.report.create'], 'active') }}">
+                            <a href="{{ route('progress.report.create') }}" class="waves-effect waves-dark">
+                            <span class="pcoded-mtext">Upload report</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <div class="pcoded-navigation-label">Admin Module</div>
             <ul class="pcoded-item pcoded-left-item">
