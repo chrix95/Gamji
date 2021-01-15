@@ -2,8 +2,8 @@
 	<div class="navbar-wrapper">
 		<div class="navbar-logo">
 			<a href="{{ route('home') }}">
-				{{-- <img class="img-fluid" src="{{ asset('files/assets/images/logo.png') }}" alt="Theme-Logo" /> --}}
-				<h2 class="navbar-brand text-center">GAMJI</h2>
+				<img class="img-fluid" src="{{ asset('files/logo.svg') }}" style="width: 60%" alt="Gamji group Logo" />
+				{{-- <h2 class="navbar-brand text-center">GAMJI</h2> --}}
 			</a>
 			<a class="mobile-menu" id="mobile-collapse" href="#!">
 				<i class="feather icon-menu icon-toggle-right"></i>

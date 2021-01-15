@@ -28,6 +28,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('files/assets/icon/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('files/assets/css/pages.css') }}">    
 @endif
+<link rel="stylesheet" type="text/css" href="{{ asset('files/assets/css/custom.css') }}">
 <!-- Vue Bootstrap Styles -->
 <!-- Scripts -->
 {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}

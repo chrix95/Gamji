@@ -8,7 +8,7 @@
                 <form class="md-float-material form-material" method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="text-center">
-                        <img src="{{ asset('files/assets/images/logo.png') }}" alt="logo.png">
+                        <img src="{{ asset('files/logo.svg') }}" alt="Gamji Group Logo">
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">
@@ -58,7 +58,7 @@
                                     </p>
                                 </div>
                                 <div class="col-md-2">
-                                    <img src="{{ asset('files/assets/images/auth/Logo-small-bottom.png') }}" alt="small-logo.png">
+                                    <img src="{{ asset('files/logo.svg') }}" style="width: 100%" alt="Gamji Group">
                                 </div>
                             </div>
                         </div>

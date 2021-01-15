@@ -10,7 +10,7 @@
                 <form method="POST" action="{{ route('login') }}" class="md-float-material form-material">
                     @csrf
                     <div class="text-center">
-                        <img src="{{ asset('files/assets/images/logo.png') }}" alt="logo.png">
+                        <img src="{{ asset('files/logo.svg') }}" alt="logo.png">
                     </div>
                     <div class="auth-box card">
                         <div class="card-block">
@@ -42,7 +42,7 @@
                             </div>
                             <div class="row m-t-25 text-left">
                                 <div class="col-12">
-                                    <div class="checkbox-fade fade-in-primary">
+                                    {{-- <div class="checkbox-fade fade-in-primary">
                                         <label>
                                             <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }} value="">
                                             <span class="cr">
@@ -50,7 +50,7 @@
                                             </span>
                                             <span class="text-inverse">Remember me</span>
                                         </label>
-                                    </div>
+                                    </div> --}}
                                     <div class="forgot-phone text-right float-right">
                                         @if (Route::has('password.request'))
                                             <a class="text-right f-w-600" href="{{ route('password.request') }}">
