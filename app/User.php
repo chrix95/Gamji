@@ -28,6 +28,9 @@ class User extends Authenticatable
     public function requistion () {
         return $this->hasMany(Requistion::class);
     }
+    public function store_request () {
+        return $this->hasMany(StoreRequest::class);
+    }
     public function branch () {
         return $this->hasOne(Branch::class, 'id', 'branch_id');
     }

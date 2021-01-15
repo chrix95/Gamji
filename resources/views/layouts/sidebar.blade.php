@@ -75,8 +75,8 @@
                         </li>
                         @endif
                         @if (in_array('store_request', \Auth::user()->permission))
-                        <li class="{{ active(['store.create'], 'active') }}">
-                            <a href="#" class="waves-effect waves-dark">
+                        <li class="{{ active(['store.request.list'], 'active') }}">
+                            <a href="{{ route('store.request.list') }}" class="waves-effect waves-dark">
                             <span class="pcoded-mtext">Request</span>
                             </a>
                         </li>

@@ -19,4 +19,7 @@ class Branch extends Model
     public function expenses () {
         return $this->hasMany(Expense::class);
     }
+    public function store_request () {
+        return $this->hasMany(StoreRequest::class);
+    }
 }

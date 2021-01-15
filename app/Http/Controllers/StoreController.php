@@ -10,6 +10,7 @@ use App\Milestone;
 use App\Inventory;
 use App\Supplier;
 use App\InventoryLog;
+use App\StoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
@@ -432,5 +433,124 @@ class StoreController extends Controller
         }
     }
 
+    public function requestIndex (Request $request) {
+        $storeRequest = StoreRequest::orderBy('id', 'desc')->get();
+        if (Auth::user()->branch_id !== NULL) {
+            $storeRequest = $storeRequest->where('branch_id', Auth::user()->branch_id);    
+        }
+        return view('pages.request.list', compact('storeRequest'));
+    }
+
+    public function requestCreate (Request $request) {
+        $equipments = Inventory::where('type', 'heavy')->orderBy('id', 'desc')->get();
+        $branches = Branch::all();
+        if (Auth::user()->branch_id !== NULL) {
+            $branches = $branches->where('id', Auth::user()->branch_id);
+        }
+        return view('pages.request.create', compact('branches', 'equipments'));
+    }
+
+    public function requestStore (Request $request) {
+        \Log::info($request);
+        $data = array(
+            'request_form' => $request->request_form,
+            'branch_id' => $request->branch_id,
+            'machines' => $request->machines,
+            'note' => $request->note
+        );
+        $validator = Validator::make($data, [
+            'request_form' => 'required',
+            'branch_id' => 'required|integer',
+            'machines' => 'required',
+            'note' => 'nullable',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->first())->withInput();
+        }
+        if (\Auth::user()->branch_id !== NULL) {
+            if (\Auth::user()->branch_id != $data['branch_id']) {
+                return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
+            }
+        }
+        try {
+            if($request->hasFile('request_form')) {
+                $file = time() . '.' . $request->request_form->getClientOriginalExtension();
+                $file_path = 'equipments/request/';
+                $data['request_form'] = $file_path . $file;
+                $request->file('request_form')->move($file_path, $file);
+            } else {
+                return redirect()->back()->withErrors("Kindly upload a request form")->withInput();
+            }
+            $data['user_id'] = \Auth::id();
+            StoreRequest::create($data);
+            Session::flash('success', 'Request submitted successfully');
+            return redirect()->route('store.request.list');   
+        } catch (\Throwable $th) {
+            \Log::info($th);
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
+        }
+    }
+
+    public function requestDestroy (Request $request, $id) {
+        $storeRequest = StoreRequest::find($id);
+        if (!$storeRequest) {
+            abort(404);
+        }
+        $storeRequest->delete();
+        return redirect()->back();
+    }
+
+    public function requestView (Request $request, $id) {
+        $storeRequest = StoreRequest::find($id);
+        if (!$storeRequest) {
+            abort(404);
+        }
+        return view('pages.request.view', compact('storeRequest'));
+    }
+
+    public function requestEdit (Request $request, $type, $id) {
+        return view('pages.request.edit', compact('type', 'id'));
+    }
+
+    public function requestUpdate(Request $request) {
+        $storeRequest = StoreRequest::find($request->id);
+        if (!$storeRequest) {
+            abort(404);
+        }
+        $data = array(
+            'approved_request_form' => $request->approved_request_form,
+            'note' => $request->note,
+            'status' => $request->type
+        );
+        $validator = Validator::make($data, [
+            'approved_request_form' => 'required',
+            'note' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->first())->withInput();
+        }
+        if (\Auth::user()->branch_id !== NULL) {
+            return redirect()->back()->withErrors('Your permission doesn\'t permit you to create a project for this branch')->withInput();
+        }
+        try {
+            if($request->hasFile('approved_request_form')) {
+                $file = time() . '.' . $request->approved_request_form->getClientOriginalExtension();
+                $file_path = 'equipments/request/';
+                $data['approved_request_form'] = $file_path . $file;
+                $request->file('approved_request_form')->move($file_path, $file);
+            }
+            $data['approval_date'] = now();
+            $data['approved_by'] = \Auth::user()->name;
+            if ($data['status'] == 'rejected') {
+                $data['reject_reason'] = $data['note'];
+            }
+            $storeRequest->update($data);
+            Session::flash('success', 'Store request updated successfully');
+            return redirect()->route('store.request.view', ['id' => $request->id]);   
+        } catch (\Throwable $th) {
+            \Log::info($th);
+            return redirect()->back()->withErrors('Internal server error. Contact admin for support')->withInput();
+        }
+    }
 
 }

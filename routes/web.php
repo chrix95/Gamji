@@ -67,6 +67,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('store', 'StoreController@store')->name('store.store');
         Route::post('update', 'StoreController@update')->name('store.update');
         Route::get('destroy/{id}', 'StoreController@destroy')->name('store.destroy');
+        Route::prefix('request')->group(function () {
+            Route::get('list', 'StoreController@requestIndex')->name('store.request.list');
+            Route::get('create', 'StoreController@requestCreate')->name('store.request.create');
+            Route::post('store', 'StoreController@requestStore')->name('store.request.store');
+            Route::get('view/{id}', 'StoreController@requestView')->name('store.request.view');
+            Route::get('edit/{type}/{id}', 'StoreController@requestEdit')->name('store.request.edit');
+            Route::post('update', 'StoreController@requestUpdate')->name('store.request.update');
+            Route::get('destroy/{id}', 'StoreController@requestDestroy')->name('store.request.destroy');
+        });
     });
     // Secretary management
     Route::prefix('secretary')->group(function () {
@@ -178,6 +187,14 @@ Route::get('permissions', function () {
             "code" => "store_request",
         ],
         [
+            "title" => "Approve/Reject Store Request",
+            "code" => "store_approval",
+        ],
+        [
+            "title" => "Delete Store Request",
+            "code" => "store_request_delete",
+        ],
+        [
             "title" => "View Suppliers",
             "code" => "supplier_view",
         ],
@@ -267,7 +284,7 @@ Route::get('permissions', function () {
         ],
     ];
     foreach ($permissions as $key => $value) {
-        // \App\Permission::create($value);
+        \App\Permission::create($value);
     }
     return "Done";
 });

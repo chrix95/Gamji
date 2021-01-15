@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
-    public $default_permission = ["project_view","project_create","project_edit","project_delete","project_add_milestone","project_expenses","store_view","store_create","store_edit","store_delete","store_request","supplier_view","supplier_create","supplier_edit","supplier_delete","employee_view","employee_create","employee_edit","employee_delete","progress_view","progress_create","progress_delete","letter_view","letter_create","letter_delete","minute_view","minute_edit","minute_create","minute_delete","notification_view","notification_edit","notification_create","notification_delete"];
+    public $default_permission = ["project_view","project_create","project_edit","project_delete","project_add_milestone","project_expenses","store_view","store_create","store_edit","store_delete","store_request","store_approval","store_request_delete","supplier_view","supplier_create","supplier_edit","supplier_delete","employee_view","employee_create","employee_edit","employee_delete","progress_view","progress_create","progress_delete","letter_view","letter_create","letter_delete","minute_view","minute_edit","minute_create","minute_delete","notification_view","notification_edit","notification_create","notification_delete"];
     public function index (Request $request) {
         $users = User::orderBy('id', 'desc')->get();
         if (Auth::user()->branch_id !== NULL) {
