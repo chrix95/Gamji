@@ -60,8 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
     Route::prefix('store')->group(function () {
-        Route::get('list', 'StoreController@index')->name('store.list');
-        Route::get('create', 'StoreController@create')->name('store.create');
+        Route::get('list/{type}', 'StoreController@index')->name('store.list');
+        Route::get('create/{type}', 'StoreController@create')->name('store.create');
         Route::get('edit/{id}', 'StoreController@edit')->name('store.edit');
         Route::get('view/{id}', 'StoreController@view')->name('store.view');
         Route::post('store', 'StoreController@store')->name('store.store');
@@ -129,4 +129,145 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('change-password', 'SettingsController@passwordView')->name('settings.password')->middleware('password.confirm');
         Route::post('change-password', 'SettingsController@changePassword')->name('settings.password.change');
     });
+});
+
+Route::get('permissions', function () {
+    $permissions = [
+        [
+            "title" => "View Project",
+            "code" => "project_view",
+        ],
+        [
+            "title" => "Create Project",
+            "code" => "project_create",
+        ],
+        [
+            "title" => "Edit Project",
+            "code" => "project_edit",
+        ],
+        [
+            "title" => "Delete Project",
+            "code" => "project_delete",
+        ],
+        [
+            "title" => "Add Project Milestone",
+            "code" => "project_add_milestone",
+        ],
+        [
+            "title" => "Add Project Expenses",
+            "code" => "project_expenses",
+        ],
+        [
+            "title" => "View Equipments",
+            "code" => "store_view",
+        ],
+        [
+            "title" => "Add Equipment",
+            "code" => "store_create",
+        ],
+        [
+            "title" => "Update Equipment",
+            "code" => "store_edit",
+        ],
+        [
+            "title" => "Delete Equipment",
+            "code" => "store_delete",
+        ],
+        [
+            "title" => "Store Request",
+            "code" => "store_request",
+        ],
+        [
+            "title" => "View Suppliers",
+            "code" => "supplier_view",
+        ],
+        [
+            "title" => "Create Supplier",
+            "code" => "supplier_create",
+        ],
+        [
+            "title" => "Update Supplier",
+            "code" => "supplier_edit",
+        ],
+        [
+            "title" => "Delete Supplier",
+            "code" => "supplier_delete",
+        ],
+        [
+            "title" => "View Employee",
+            "code" => "employee_view",
+        ],
+        [
+            "title" => "Create Employee",
+            "code" => "employee_create",
+        ],
+        [
+            "title" => "Update Employee",
+            "code" => "employee_edit",
+        ],
+        [
+            "title" => "Delete Employee",
+            "code" => "employee_delete",
+        ],
+        [
+            "title" => "View Report",
+            "code" => "progress_view",
+        ],
+        [
+            "title" => "Upload Report",
+            "code" => "progress_create",
+        ],
+        [
+            "title" => "Delete Report",
+            "code" => "progress_delete",
+        ],
+        [
+            "title" => "View Letters",
+            "code" => "letter_view",
+        ],
+        [
+            "title" => "Upload Letters",
+            "code" => "letter_create",
+        ],
+        [
+            "title" => "Delete Letters",
+            "code" => "letter_delete",
+        ],
+        [
+            "title" => "View Minutes",
+            "code" => "minute_view",
+        ],
+        [
+            "title" => "Update Minutes",
+            "code" => "minute_edit",
+        ],
+        [
+            "title" => "Upload Minutes",
+            "code" => "minute_create",
+        ],
+        [
+            "title" => "Delete Minutes",
+            "code" => "minute_delete",
+        ],
+        [
+            "title" => "View Notification",
+            "code" => "notification_view",
+        ],
+        [
+            "title" => "Update Notification",
+            "code" => "notification_edit",
+        ],
+        [
+            "title" => "Upload Notification",
+            "code" => "notification_create",
+        ],
+        [
+            "title" => "Delete Notification",
+            "code" => "notification_delete",
+        ],
+    ];
+    foreach ($permissions as $key => $value) {
+        // \App\Permission::create($value);
+    }
+    return "Done";
 });

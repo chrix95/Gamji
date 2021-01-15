@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'address', 'dob', 'employee_code', 'branch_id', 'role', 'guarantor_name', 'guarantor_phone', 'guarantor_address', 'next_of_kin_name', 'next_of_kin_phone', 'means_of_identification', 'employment_letter'
+        'name', 'email', 'password', 'phone', 'address', 'dob', 'employee_code', 'branch_id', 'role', 'guarantor_name', 'guarantor_phone', 'guarantor_address', 'next_of_kin_name', 'next_of_kin_phone', 'means_of_identification', 'employment_letter', 'permission'
     ];
 
     protected $hidden = [
@@ -33,5 +33,12 @@ class User extends Authenticatable
     }
     public function userDocument () {
         return $this->hasMany(UserDocument::class);
+    }
+    public function setPermissionAttribute($value) {
+        $this->attributes['permission'] = json_encode($value);
+    }
+    public function getPermissionAttribute($value)
+    {
+        return json_decode($value);
     }
 }

@@ -11,11 +11,13 @@
                         List
                     </h5>
                 </div>
+                @if (in_array('supplier_create', \Auth::user()->permission))
                 <div class="col-md-7 text-right">
                     <a href="{{ route('supplier.create') }}">
                         <button type="button" class="btn btn-primary btn-sm">Create Supplier</button>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
         <div class="card-block">
@@ -40,12 +42,16 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
+                                @if (in_array('supplier_edit', \Auth::user()->permission))
                                 <a href="{{ route('supplier.edit', ['id' => $item->id]) }}">
                                     <i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-c-green"></i>
                                 </a>
+                                @endif
+                                @if (in_array('supplier_delete', \Auth::user()->permission))
                                 <a href="{{ route('supplier.destroy', ['id' => $item->id]) }}">
                                     <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

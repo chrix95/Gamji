@@ -78,15 +78,21 @@
                         </div>
                         @if ($project->status !== 'closed' || $project->status !== 'completed')
                         <div class="col-md-7 text-right">
+                            @if (in_array('project_add_milestone', \Auth::user()->permission))
                             <a href="{{ route('project.create.milestone', ['project_id' => $project->id]) }}">
                                 <button type="button" class="btn btn-primary btn-sm">Add Milestone</button>
                             </a>
+                            @endif
+                            @if (in_array('project_edit', \Auth::user()->permission))
                             <a href="{{ route('project.edit', ['project_code' => $project->project_code]) }}">
                                 <button type="button" class="btn btn-info btn-sm">Edit Project</button>
                             </a>
+                            @endif
+                            @if (in_array('project_expenses', \Auth::user()->permission))
                             <a href="{{ route('project.expenses.add', ['id' => $project->id]) }}">
                                 <button type="button" class="btn btn-danger btn-sm">Add Expenses</button>
                             </a>
+                            @endif
                         </div>
                         @endif
                     </div>
@@ -254,7 +260,11 @@
                                 </div>
                             </div>
                             @empty
-                                <p>No milstone for this project <a href="{{ route('project.create.milestone', ['project_id' => $project->id]) }}" class="text-c-blue"> Create a milstone</a></p>
+                                <p>No milstone for this project 
+                                    @if (in_array('project_add_milestone', \Auth::user()->permission))
+                                        <a href="{{ route('project.create.milestone', ['project_id' => $project->id]) }}" class="text-c-blue"> Create a milstone</a>
+                                    @endif
+                                </p>
                             @endforelse
                         </div>
                     </div>

@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('next_of_kin_phone');
             $table->string('means_of_identification');
             $table->string('employment_letter')->nullable();
+            $table->text('permission');
             $table->rememberToken();
             $table->timestamps();
         });

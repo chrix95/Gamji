@@ -11,11 +11,13 @@
                         List
                     </h5>
                 </div>
+                @if (in_array('letter_create', \Auth::user()->permission))
                 <div class="col-md-7 text-right">
                     <a href="{{ route('secretary.letter.create') }}">
                         <button type="button" class="btn btn-primary btn-sm">Upload Letter</button>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
         <div class="card-block">
@@ -45,9 +47,11 @@
                             </td>
                             <td>{{ $item->created_at }}</td>
                             <td>
+                                @if (in_array('letter_delete', \Auth::user()->permission))
                                 <a href="{{ route('secretary.letter.destroy', ['id' => $item->id]) }}">
                                     <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -92,6 +92,21 @@
                                                 </p>
                                                 <br><br>
                                                 <div class="col-xs-12">
+                                                    <h5><strong>Permissions: </strong></h5>
+                                                </div>
+                                                <div class="row">
+                                                    @foreach ($permissions as $item)
+                                                        @if(in_array($item->code, $user->permission))
+                                                            <div class="col-sm-2">
+                                                                <p>
+                                                                    {{ $item->title }}, 
+                                                                </p>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                                <br><br>
+                                                <div class="col-xs-12">
                                                     <h5>
                                                         <strong>Uploaded Documents</strong>
                                                         <span style="float: right">

@@ -1,8 +1,9 @@
 <nav class="navbar header-navbar pcoded-header">
 	<div class="navbar-wrapper">
 		<div class="navbar-logo">
-			<a href="index-2.html">
-				<img class="img-fluid" src="{{ asset('files/assets/images/logo.png') }}" alt="Theme-Logo" />
+			<a href="{{ route('home') }}">
+				{{-- <img class="img-fluid" src="{{ asset('files/assets/images/logo.png') }}" alt="Theme-Logo" /> --}}
+				<h2 class="navbar-brand text-center">GAMJI</h2>
 			</a>
 			<a class="mobile-menu" id="mobile-collapse" href="#!">
 				<i class="feather icon-menu icon-toggle-right"></i>

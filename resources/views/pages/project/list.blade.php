@@ -11,11 +11,13 @@
                         List
                     </h5>
                 </div>
+                @if (in_array('project_create', \Auth::user()->permission))
                 <div class="col-md-7 text-right">
                     <a href="{{ route('project.create') }}">
                         <button type="button" class="btn btn-primary btn-sm">Create Project</button>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
         <div class="card-block">
@@ -62,15 +64,21 @@
                                 @endif
                             </td>
                             <td>
+                                @if (in_array('project_view', \Auth::user()->permission))
                                 <a href="{{ route('project.view', ['project_code' => $item->project_code]) }}">
                                     <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>
                                 </a>
+                                @endif
+                                @if (in_array('project_edit', \Auth::user()->permission))
                                 <a href="{{ route('project.edit', ['project_code' => $item->project_code]) }}">
                                     <i class="icon feather icon-edit f-w-600 f-16 m-r-15 text-c-green"></i>
                                 </a>
+                                @endif
+                                @if (in_array('project_delete', \Auth::user()->permission))
                                 <a href="{{ route('project.destroy', ['id' => $item->id]) }}">
                                     <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
                                 </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

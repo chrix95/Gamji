@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Branch;
+use App\Permission;
 use App\UserDocument;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
+    public $default_permission = ["project_view","project_create","project_edit","project_delete","project_add_milestone","project_expenses","store_view","store_create","store_edit","store_delete","store_request","supplier_view","supplier_create","supplier_edit","supplier_delete","employee_view","employee_create","employee_edit","employee_delete","progress_view","progress_create","progress_delete","letter_view","letter_create","letter_delete","minute_view","minute_edit","minute_create","minute_delete","notification_view","notification_edit","notification_create","notification_delete"];
     public function index (Request $request) {
         $users = User::orderBy('id', 'desc')->get();
         if (Auth::user()->branch_id !== NULL) {
@@ -24,10 +26,11 @@ class EmployeeController extends Controller
 
     public function create (Request $request) {
         $branches = Branch::all();
+        $permissions = Permission::all();
         if (Auth::user()->branch_id !== NULL) {
             $branches = $branches->where('id', Auth::user()->branch_id);
         }
-        return view('pages.employee.create', compact('branches'));
+        return view('pages.employee.create', compact('branches', 'permissions'));
     }
 
     public function createdocs (Request $request, $employee_code) {
@@ -49,7 +52,8 @@ class EmployeeController extends Controller
             'guarantor_phone' => $request->guarantor_phone,
             'guarantor_address' => $request->guarantor_address,
             'next_of_kin_name' => $request->next_of_kin_name,
-            'next_of_kin_phone' => $request->next_of_kin_phone
+            'next_of_kin_phone' => $request->next_of_kin_phone,
+            'permission' => $request->permission
         );
         $validator = Validator::make($data, [
             'employee_code' => 'required|string',
@@ -64,7 +68,8 @@ class EmployeeController extends Controller
             'guarantor_phone' => 'required|numeric',
             'guarantor_address' => 'required|string',
             'next_of_kin_name' => 'required|string',
-            'next_of_kin_phone' => 'required|string'
+            'next_of_kin_phone' => 'required|string',
+            'permission' => 'required|array'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
@@ -143,13 +148,14 @@ class EmployeeController extends Controller
     public function edit (Request $request, $employee_code) {
         $user = User::where('employee_code', $employee_code)->first();
         $branches = Branch::all();
+        $permissions = Permission::all();
         if (Auth::user()->branch_id !== NULL) {
             $branches = $branches->where('id', Auth::user()->branch_id);
         }
         if (!$user) {
             abort(404);
         }
-        return view('pages.employee.edit', compact('branches', 'user'));
+        return view('pages.employee.edit', compact('branches', 'user', 'permissions'));
     }
 
     public function update(Request $request) {
@@ -162,14 +168,15 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'branch_id' => $request->branch_id,
+            'branch_id' => $request->branch_id == 'NULL' ? NULL : $request->branch_id,
             'dob' => $request->dob,
             'address' => $request->address,
             'guarantor_name' => $request->guarantor_name,
             'guarantor_phone' => $request->guarantor_phone,
             'guarantor_address' => $request->guarantor_address,
             'next_of_kin_name' => $request->next_of_kin_name,
-            'next_of_kin_phone' => $request->next_of_kin_phone
+            'next_of_kin_phone' => $request->next_of_kin_phone,
+            'permission' => $request->permission
         );
         $validator = Validator::make($data, [
             'employee_code' => 'required|string',
@@ -183,7 +190,8 @@ class EmployeeController extends Controller
             'guarantor_phone' => 'required|numeric',
             'guarantor_address' => 'required|string',
             'next_of_kin_name' => 'required|string',
-            'next_of_kin_phone' => 'required|string'
+            'next_of_kin_phone' => 'required|string',
+            'permission' => 'required'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
@@ -211,10 +219,11 @@ class EmployeeController extends Controller
 
     public function view (Request $request, $employee_code) {
         $user = User::where('employee_code', $employee_code)->first();
+        $permissions = Permission::all();
         if (!$user) {
             abort(404);
         }
-        return view('pages.employee.view', compact('user'));
+        return view('pages.employee.view', compact('user', 'permissions'));
     }
 
     public function destroy (Request $request, $id) {

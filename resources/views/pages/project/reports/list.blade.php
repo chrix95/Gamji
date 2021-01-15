@@ -11,11 +11,13 @@
                         List
                     </h5>
                 </div>
+                @if (in_array('progress_create', \Auth::user()->permission))
                 <div class="col-md-7 text-right">
                     <a href="{{ route('progress.report.create') }}">
                         <button type="button" class="btn btn-primary btn-sm">Upload daily report</button>
                     </a>
                 </div>
+                @endif
             </div>
         </div>
         <div class="card-block">
