@@ -90,6 +90,7 @@
                                                 <p>
                                                     <strong>Phone:</strong> {{ strtoupper($user->next_of_kin_phone) }}
                                                 </p>
+                                                @if (\Auth::user()->branch_id === NULL)
                                                 <br><br>
                                                 <div class="col-xs-12">
                                                     <h5><strong>Permissions: </strong></h5>
@@ -105,6 +106,7 @@
                                                         @endif
                                                     @endforeach
                                                 </div>
+                                                @endif
                                                 <br><br>
                                                 <div class="col-xs-12">
                                                     <h5>
