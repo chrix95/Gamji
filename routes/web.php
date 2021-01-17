@@ -45,6 +45,19 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('store', 'ProjectController@store')->name('project.store');
         Route::post('update', 'ProjectController@update')->name('project.update');
         Route::get('destroy/{id}', 'ProjectController@destroy')->name('project.destroy');
+        // Project Client
+        Route::prefix('client')->group(function () {
+            Route::get('list', 'ProjectController@indexClient')->name('project.list.client');
+            Route::get('create', 'ProjectController@createClient')->name('project.create.client');
+            Route::post('store', 'ProjectController@storeClient')->name('project.store.client');
+            Route::get('view/{id}', 'ProjectController@viewClient')->name('project.view.client');
+            Route::get('upload/{client_id}', 'ProjectController@uploadClient')->name('project.upload.client');
+            Route::post('upload', 'ProjectController@storeUploadClient')->name('project.upload.store.client');
+            Route::get('upload-destory/{id}', 'ProjectController@destroyUploadClient')->name('project.upload.destroy.client');
+            Route::get('edit/{client_id}', 'ProjectController@editClient')->name('project.edit.client');
+            Route::post('update', 'ProjectController@updateClient')->name('project.update.client');
+            Route::get('destroy/{id}', 'ProjectController@destroyClient')->name('project.destroy.client');
+        });
         // Milestones
         Route::prefix('milestone')->group(function () {
             Route::get('{project_id}/create', 'ProjectController@createMilestone')->name('project.create.milestone');

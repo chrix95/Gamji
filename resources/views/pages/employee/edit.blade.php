@@ -45,6 +45,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Employee position</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="position" placeholder="Employee position" value="{{ $user->position }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-sm-2 col-form-label">
                             Date of Birth
                         </div>

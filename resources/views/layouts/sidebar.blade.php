@@ -38,6 +38,13 @@
                             </a>
                         </li>
                         @endif
+                        @if (in_array('client_view', \Auth::user()->permission))
+                        <li class="{{ active(['project.list.client'], 'active') }}">
+                            <a href="{{ route('project.list.client') }}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Project client</span>
+                            </a>
+                        </li>
+                        @endif
                         @if (in_array('project_expenses', \Auth::user()->permission))
                         <li class="{{ active(['project.expenses.create'], 'active') }}">
                             <a href="{{ route('project.expenses.create') }}" class="waves-effect waves-dark">

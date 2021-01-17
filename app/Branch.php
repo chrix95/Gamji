@@ -22,4 +22,7 @@ class Branch extends Model
     public function store_request () {
         return $this->hasMany(StoreRequest::class);
     }
+    public function clients () {
+        return $this->hasMany(Client::class);
+    }
 }

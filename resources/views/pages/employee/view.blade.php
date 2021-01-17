@@ -33,6 +33,9 @@
                                                     <label class="label label-info">{{ strtoupper($user->employee_code) }}</label>
                                                 </div>
                                                 <p>
+                                                    <strong>POSITION:</strong> {{ strtoupper($user->position) }}
+                                                </p>
+                                                <p>
                                                     <strong>PHONE:</strong> {{ strtoupper($user->phone) }}
                                                 </p>
                                                 <p>
