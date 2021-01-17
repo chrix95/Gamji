@@ -63,7 +63,7 @@ class EmployeeController extends Controller
             'password' => 'required|min:6',
             'address' => 'required|string',
             'dob' => 'required|date',
-            'branch_id' => 'required|integer',
+            'branch_id' => 'required|nullable',
             'guarantor_name' => 'required|string',
             'guarantor_phone' => 'required|numeric',
             'guarantor_address' => 'required|string',
