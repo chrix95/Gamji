@@ -10,9 +10,11 @@
                     <h5>
                         Employe Details
                     </h5>
+                    @if (in_array('employee_edit', \Auth::user()->permission))
                     <a href="{{ route('employee.edit', ['employee_code' => $user->employee_code]) }}" style="float: right;">
                         <button type="button" class="btn btn-sm btn-primary">Edit</button>
                     </a>
+                    @endif
                 </div>
                 <div class="row card-block">
                     <div class="col-md-12">

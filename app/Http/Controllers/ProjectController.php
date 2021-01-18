@@ -456,42 +456,42 @@ class ProjectController extends Controller
                 $client->documents()->save($clientDocument);
             }
             if($request->hasFile('docs2')) {
-                $file = $data['title1'] ? Str::slug($data['title1']) . time() . '.' . $request->docs2->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs2->getClientOriginalExtension();
+                $file = $data['title2'] ? Str::slug($data['title2']) . time() . '.' . $request->docs2->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs2->getClientOriginalExtension();
                 $file_path = "documents/" . Str::slug($client->name) . "/upload/";
                 $request->file('docs2')->move($file_path, $file);
                 $data['docs'] = $file_path . $file;
                 $clientDocument = new ClientDocument();
-                $clientDocument->title = $data['title1'] ? Str::slug($data['title1']) . time() : Str::slug($client->name) . time();
+                $clientDocument->title = $data['title2'] ? Str::slug($data['title2']) . time() : Str::slug($client->name) . time();
                 $clientDocument->docs = $file_path . $file;
                 $client->documents()->save($clientDocument);
             }
             if($request->hasFile('docs3')) {
-                $file = $data['title1'] ? Str::slug($data['title1']) . time() . '.' . $request->docs3->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs3->getClientOriginalExtension();
+                $file = $data['title3'] ? Str::slug($data['title3']) . time() . '.' . $request->docs3->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs3->getClientOriginalExtension();
                 $file_path = "documents/" . Str::slug($client->name) . "/upload/";
                 $request->file('docs3')->move($file_path, $file);
                 $data['docs'] = $file_path . $file;
                 $clientDocument = new ClientDocument();
-                $clientDocument->title = $data['title1'] ? Str::slug($data['title1']) . time() : Str::slug($client->name) . time();
+                $clientDocument->title = $data['title3'] ? Str::slug($data['title3']) . time() : Str::slug($client->name) . time();
                 $clientDocument->docs = $file_path . $file;
                 $client->documents()->save($clientDocument);
             }
             if($request->hasFile('docs4')) {
-                $file = $data['title1'] ? Str::slug($data['title1']) . time() . '.' . $request->docs4->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs4->getClientOriginalExtension();
+                $file = $data['title4'] ? Str::slug($data['title4']) . time() . '.' . $request->docs4->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs4->getClientOriginalExtension();
                 $file_path = "documents/" . Str::slug($client->name) . "/upload/";
                 $request->file('docs4')->move($file_path, $file);
                 $data['docs'] = $file_path . $file;
                 $clientDocument = new ClientDocument();
-                $clientDocument->title = $data['title1'] ? Str::slug($data['title1']) . time() : Str::slug($client->name) . time();
+                $clientDocument->title = $data['title4'] ? Str::slug($data['title4']) . time() : Str::slug($client->name) . time();
                 $clientDocument->docs = $file_path . $file;
                 $client->documents()->save($clientDocument);
             }
             if($request->hasFile('docs5')) {
-                $file = $data['title1'] ? Str::slug($data['title1']) . time() . '.' . $request->docs5->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs5->getClientOriginalExtension();
+                $file = $data['title5'] ? Str::slug($data['title5']) . time() . '.' . $request->docs5->getClientOriginalExtension() : Str::slug($client->name) . time() . '.' . $request->docs5->getClientOriginalExtension();
                 $file_path = "documents/" . Str::slug($client->name) . "/upload/";
                 $request->file('docs5')->move($file_path, $file);
                 $data['docs'] = $file_path . $file;
                 $clientDocument = new ClientDocument();
-                $clientDocument->title = $data['title1'] ? Str::slug($data['title1']) . time() : Str::slug($client->name) . time();
+                $clientDocument->title = $data['title5'] ? Str::slug($data['title5']) . time() : Str::slug($client->name) . time();
                 $clientDocument->docs = $file_path . $file;
                 $client->documents()->save($clientDocument);
             }

@@ -57,23 +57,41 @@
                                                             No document uploaded yet.
                                                         </div>
                                                     @else
-                                                    @foreach ($client->documents as $item)
-                                                    <div class="col-md-4">
-                                                        <p>
-                                                            <strong>{{ $item->title }}</strong> 
-                                                            @if (in_array('client_upload_view', \Auth::user()->permission))
-                                                            <a href="{{ asset($item->docs) }}" target="_blank">
-                                                                <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>
-                                                            </a>
-                                                            @endif
-                                                            @if (in_array('client_upload_delete', \Auth::user()->permission))
-                                                            <a href="{{ route('project.upload.destroy.client', ['id' => $item->id]) }}">
-                                                                <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
-                                                            </a>
-                                                            @endif
-                                                        </p>
+                                                    <div class="dt-responsive table-responsive">
+                                                        <table id="document-table" class="table table-striped table-bordered nowrap">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Title</th>
+                                                                    @if (in_array('client_upload_view', \Auth::user()->permission))
+                                                                    <th>Document</th>
+                                                                    @endif
+                                                                    <th>[ACTION]</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($client->documents as $item)
+                                                                <tr>
+                                                                    <td>{{ $item->title }}</td>
+                                                                    @if (in_array('client_upload_view', \Auth::user()->permission))
+                                                                    <td>
+                                                                        <a href="{{ asset($item->docs) }}" target="_blank">
+                                                                            <i class="icon feather icon-eye f-w-600 f-16 m-r-15 text-c-green"></i>
+                                                                            View attachment
+                                                                        </a>
+                                                                    </td>
+                                                                    @endif
+                                                                    <td>
+                                                                        @if (in_array('client_upload_delete', \Auth::user()->permission))
+                                                                        <a href="{{ route('project.upload.destroy.client', ['id' => $item->id]) }}">
+                                                                            <i class="feather icon-trash-2 f-w-600 f-16 text-c-red"></i>
+                                                                        </a>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                    @endforeach
                                                     @endif
                                                 </div>
                                             </div>

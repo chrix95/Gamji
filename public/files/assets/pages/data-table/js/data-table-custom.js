@@ -511,6 +511,11 @@ $(document).ready(function() {
             [3, "desc"]
         ]
     });
+    $('#document-table').DataTable({
+        "order": [
+            [1, "desc"]
+        ]
+    });
 
     $('#multi-colum-dt').DataTable({
         columnDefs: [{

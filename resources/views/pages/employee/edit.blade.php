@@ -116,11 +116,6 @@
                             <input type="text" class="form-control" name="next_of_kin_phone" placeholder="Next of kin phone number" value="{{ $user->next_of_kin_phone }}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-sm-12">
-                            <p><strong>Select permissions</strong></p>
-                        </div>
-                    </div>
                     @if (Auth::user()->branch_id !== NULL)
                         <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
                     @else
@@ -137,6 +132,12 @@
                             </div>
                         </div>
                     @endif
+                    @if (in_array('access_permission', \Auth::user()->permission))
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <p><strong>Select permissions</strong></p>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Select desired permissions</label>
                         <div class="col-sm-10">
@@ -151,6 +152,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <div class="form-group row">
                         <div class="col-sm-12">

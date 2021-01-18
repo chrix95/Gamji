@@ -6,7 +6,7 @@
 <!-- waves js -->
 <script src="{{ asset('files/assets/pages/waves/js/waves.min.js') }}"></script>
 <!-- jquery slimscroll js -->
-<script type="text/javascript" src="../files/bower_components/modernizr/js/modernizr.js"></script>  
+<script type="text/javascript" src="{{ asset('files/bower_components/modernizr/js/modernizr.js') }}"></script>  
 <!-- modernizr js -->
 <script type="text/javascript" src="{{ asset('files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
 <!-- Float Chart js -->

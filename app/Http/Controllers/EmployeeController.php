@@ -8,6 +8,7 @@ use App\Permission;
 use App\UserDocument;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -43,25 +44,25 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => $request->password,
+            'password' => $request->password ?? NULL,
             'address' => $request->address,
             'position' => $request->position,
             'dob' => $request->dob,
-            'password_confirmation' => $request->password_confirmation,
+            'password_confirmation' => $request->password_confirmation ?? NULL,
             'branch_id' => $request->branch_id,
             'guarantor_name' => $request->guarantor_name,
             'guarantor_phone' => $request->guarantor_phone,
             'guarantor_address' => $request->guarantor_address,
             'next_of_kin_name' => $request->next_of_kin_name,
             'next_of_kin_phone' => $request->next_of_kin_phone,
-            'permission' => $request->permission
+            'permission' => $request->permission ?? []
         );
         $validator = Validator::make($data, [
             'employee_code' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'phone' => 'required|numeric|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'nullable|min:6',
             'address' => 'required|string',
             'position' => 'required|string',
             'dob' => 'required|date',
@@ -71,15 +72,17 @@ class EmployeeController extends Controller
             'guarantor_address' => 'required|string',
             'next_of_kin_name' => 'required|string',
             'next_of_kin_phone' => 'required|string',
-            'permission' => 'required|array'
+            'permission' => 'nullable'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first())->withInput();
         }
-        if ($data['password'] != $data['password_confirmation']) {
-            return redirect()->back()->withErrors('The password confirmation does not match.')->withInput();
+        if (Auth::user()->branch_id === NULL) {
+            if ($data['password'] != $data['password_confirmation']) {
+                return redirect()->back()->withErrors('The password confirmation does not match.')->withInput();
+            }
+            $data['password'] = Hash::make($request->password);
         }
-        $data['password'] = Hash::make($request->password);
         // send an email to the user if requested
         if (\Auth::user()->branch_id !== NULL) {
             if (\Auth::user()->branch_id != $data['branch_id']) {
@@ -234,6 +237,13 @@ class EmployeeController extends Controller
         $user = User::find($id);
         if (!$user) {
             abort(404);
+        }
+        foreach ($user->userDocument as $value) {
+            if(file_exists($value->docs)) {
+                File::delete($value->docs);
+            }
+            @unlink($value->docs);
+            $value->delete();
         }
         $user->delete();
         return redirect()->back();
